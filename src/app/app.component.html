@@ -1,3 +1,25 @@
 <!--angular.json mettre le chemin des image dans assests Se renseigner sur webpack-->
+<<<<<<< HEAD
 
 <app-dress-list></app-dress-list>
+=======
+<mat-toolbar color="primary" class="navbar">
+  <div>Back office</div>
+  <div>
+    <button mat-button [routerLink]="'/customerList'">Clients</button>
+    <button mat-button [routerLink]="'/dressList'">Robes</button>
+    <button mat-button [routerLink]="'/orderList'">Commandes</button>
+  </div>
+</mat-toolbar>
+<p><a [routerLink]="'/customerList'">Clients</a></p>
+<div id="wrapper">
+  <router-outlet></router-outlet>
+</div>
+<mat-toolbar color="primary" class="navbar">
+  <div>Henallux IESN - Projet Informatique Intégré</div>
+  <div>
+    <span>Florian Janssens</span>
+    <span>Joris Zonowatnik</span>
+  </div>
+</mat-toolbar>
+>>>>>>> 1191799fc4337d0cc8d27fd647cc46da3be8159c

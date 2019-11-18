@@ -9,8 +9,10 @@ import { DressFormComponent } from './dress-form/dress-form.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderFormComponent } from './order-form/order-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material'; 
-import { HttpClientModule } from '@angular/common/http';
+import { ConnectionScreenComponent } from './connection-screen/connection-screen.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -21,13 +23,15 @@ import { HttpClientModule } from '@angular/common/http';
     DressFormComponent,
     OrderListComponent,
     OrderFormComponent,
-    MatTableModule,
-    HttpClientModule
+    ConnectionScreenComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

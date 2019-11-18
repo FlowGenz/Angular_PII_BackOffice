@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 import { Dress } from '../model/Dress';
 import { DressService } from '../dress.service';
-
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dress-list',
@@ -14,10 +16,9 @@ export class DressListComponent implements OnInit {
 
   listDress: Array<Dress>;
   dataSource = this.listDress;
-
-  constructor(private service : DressService) { }
-
   
+
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private service: DressService) { }
 
   ngOnInit() {
     this.listDress = this.service.getAll();
