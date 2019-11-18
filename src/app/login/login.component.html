@@ -1,1 +1,18 @@
-<p>login works!</p>
+<form id="loginForm" [formGroup]="accountCredentialsForm">
+    <fieldset>
+        <legend>Authentification</legend>
+        <p>
+                <mat-form-field>
+                    <input matInput placeholder="Nom d'utilisateur" formControlName="username"/>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <input type="password" matInput placeholder="Mot de passe" formControlName="password"/>
+                </mat-form-field>
+            </p>
+            <p>
+                <button mat-raised-button type="submit" color="primary">Se connecter</button>
+            </p>
+    </fieldset>
+</form>
