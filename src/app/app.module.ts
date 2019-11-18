@@ -13,6 +13,8 @@ import { ConnectionScreenComponent } from './connection-screen/connection-screen
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { MaterialModule } from './material/material.module';
     OrderListComponent,
     OrderFormComponent,
     ConnectionScreenComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
