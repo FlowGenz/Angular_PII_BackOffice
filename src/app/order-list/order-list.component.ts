@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-order-list',
@@ -10,7 +7,7 @@ import { Validators } from '@angular/forms';
 })
 export class OrderListComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) { }
+  constructor() { }
 
   ngOnInit() {
   }

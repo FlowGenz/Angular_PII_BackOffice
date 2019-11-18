@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dress-form',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DressFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
   }
