@@ -1,0 +1,18 @@
+.navbar {
+    justify-content: space-between;
+}
+
+.navbar button, .navbar span {
+    padding-right: 20px;
+}
+
+.navbar span {
+    font-size: 60%;
+}
+
+#wrapper {
+    height: 100%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}

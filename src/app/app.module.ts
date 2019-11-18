@@ -10,6 +10,10 @@ import { DressFormComponent } from './dress-form/dress-form.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderFormComponent } from './order-form/order-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConnectionScreenComponent } from './connection-screen/connection-screen.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -19,12 +23,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DressListComponent,
     DressFormComponent,
     OrderListComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    ConnectionScreenComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
