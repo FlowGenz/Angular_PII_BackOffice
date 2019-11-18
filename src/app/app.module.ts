@@ -9,6 +9,7 @@ import { DressListComponent } from './dress-list/dress-list.component';
 import { DressFormComponent } from './dress-form/dress-form.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderFormComponent } from './order-form/order-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { OrderFormComponent } from './order-form/order-form.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
