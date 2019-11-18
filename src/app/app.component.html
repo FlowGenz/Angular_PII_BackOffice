@@ -1,10 +1,14 @@
 <!--angular.json mettre le chemin des image dans assests Se renseigner sur webpack-->
 <mat-toolbar color="primary" class="navbar">
-  <div>Back office</div>
   <div>
+    <span id="backoffice">Back office</span>
     <button mat-button [routerLink]="'/customerList'">Clients</button>
     <button mat-button [routerLink]="'/dressList'">Robes</button>
     <button mat-button [routerLink]="'/orderList'">Commandes</button>
+  </div>
+  <div>
+    <button mat-button [routerLink]="'/login'">Se connecter</button>
+    <button mat-button [routerLink]="'/register'">S'inscrire</button>
   </div>
 </mat-toolbar>
 <div id="wrapper">
