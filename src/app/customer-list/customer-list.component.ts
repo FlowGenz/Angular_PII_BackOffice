@@ -41,5 +41,4 @@ export class CustomerListComponent implements OnInit {
     this.route.snapshot.paramMap.get("adresse"),
     parseInt(this.route.snapshot.paramMap.get("pointsFidelite")));
   }
-
 }
