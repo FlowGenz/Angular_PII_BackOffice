@@ -1,1 +1,76 @@
-<p>customer-form works!</p>
+<form class="formOffice" [formGroup]="customerForm">
+    <fieldset>
+        <legend>Client</legend>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Id" formControlName="id"/>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Nom d'utilisateur" formControlName="username" required />
+                <mat-error *ngIf="customerForm.get('username').hasError('required')">
+                    Nom d'utilisateur <strong>requis</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="password" placeholder="Mot de passe" formControlName="password" required />
+                <mat-error *ngIf="customerForm.get('password').hasError('required')">
+                    Mot de passe <strong>requis</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Prénom" formControlName="firstName" required />
+                <mat-error *ngIf="customerForm.get('firstName').hasError('required')">
+                    Prénom <strong>requis</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Nom" formControlName="lastName" required />
+                <mat-error *ngIf="customerForm.get('lastName').hasError('required')">
+                    Nom <strong>requis</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="email" placeholder="Adresse e-mail" formControlName="mailAddress" required />
+                <mat-error
+                    *ngIf="customerForm.get('mailAddress').hasError('email') && !customerForm.get('mailAddress').hasError('required')">
+                    Format de l'adresse mail <strong>incorrect</strong>
+                </mat-error>
+                <mat-error *ngIf="customerForm.get('mailAddress').hasError('required')">
+                    Adresse mail <strong>requise</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <span matPrefix>+32</span>
+                <input matInput type="tel" placeholder="Numéro de téléphone" formControlName="phoneNumber" />
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Adresse" formControlName="address" />
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Points de fidélité" formControlName="fidelityPoints" value="0" required />
+                <mat-error *ngIf="customerForm.get('id').hasError('required')">
+                    Points de fidélité <strong>requis</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <button mat-raised-button color="primary" type="submit">Ajouter utilisateur</button>
+        </p>
+    </fieldset>
+</form>

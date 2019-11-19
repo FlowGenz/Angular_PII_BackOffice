@@ -14,14 +14,14 @@ export class CustomerFormComponent implements OnInit {
   private customer: Customer;
   private customerForm = this.formBuilder.group({
     id: [''],
-    username: [''],
-    password: [''],
-    prenom: [''],
-    nom: [''],
-    adresseMail: [''],
-    numeroTelephone: [''],
-    adresse: [''],
-    pointsFidelite: ['']
+    username: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(20)])],
+    password: ['',Validators.compose([Validators.minLength(8), Validators.maxLength(20)])],
+    firstName: [''],
+    lastName: [''],
+    mailAddress: ['', Validators.compose([Validators.required, Validators.email])],
+    phoneNumber: ['', Validators.pattern("[0-9]{9}")],
+    address: [''],
+    fidelityPoints: ['']
   });
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) { }

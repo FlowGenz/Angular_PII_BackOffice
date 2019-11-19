@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Dress } from '../model/Dress';
 import { DressService } from '../dress.service';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-dress-list',
