@@ -1,1 +1,64 @@
-<p>register works!</p>
+<form class="formOffice" [formGroup]="registerForm">
+    <fieldset>
+        <legend>Inscription</legend>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Nom d'utilisateur" formControlName="username" required/>
+                <mat-error *ngIf="registerForm.get('username').hasError('required')">
+                    Nom d'utilisateur <strong>requis</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="password" placeholder="Mot de passe" formControlName="password" required/>
+                <mat-error *ngIf="registerForm.get('password').hasError('required')">
+                    Mot de passe <strong>requis</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Prénom" formControlName="firstName" required/>
+                <mat-error *ngIf="registerForm.get('firstName').hasError('required')">
+                    Prénom <strong>requis</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Nom" formControlName="lastName" required/>
+                <mat-error *ngIf="registerForm.get('lastName').hasError('required')">
+                    Nom <strong>requis</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="email" placeholder="Adresse e-mail" formControlName="mailAddress" required/>
+                <mat-error *ngIf="registerForm.get('mailAddress').hasError('email') && !registerForm.get('mailAddress').hasError('required')">
+                    Format de l'adresse mail <strong>incorrect</strong>
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('mailAddress').hasError('required')">
+                    Adresse mail <strong>requise</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <span matPrefix>+32</span>
+                <input matInput type="tel" placeholder="Numéro de téléphone" formControlName="phoneNumber"/>
+                <mat-hint align="start">Optionnel</mat-hint>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Adresse" formControlName="address"/>
+                <mat-hint align="start">Optionnel</mat-hint>
+            </mat-form-field>
+        </p>
+        <p>
+            <button mat-raised-button color="primary" type="submit">Créer le compte</button>
+        </p>
+    </fieldset>
+</form>

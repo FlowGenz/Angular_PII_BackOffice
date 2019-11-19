@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Dress } from '../model/Dress';
 import { DressService } from '../dress.service';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-dress-list',

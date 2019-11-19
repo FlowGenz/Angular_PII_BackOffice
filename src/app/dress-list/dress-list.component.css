@@ -1,3 +1,9 @@
 table {
     width: 100%;
 }
+
+#management {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: right;
+}

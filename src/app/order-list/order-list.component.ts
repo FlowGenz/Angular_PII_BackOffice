@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Order } from 'src/app/model/Order';
 import { OrderService } from 'src/app/order.service';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-order-list',

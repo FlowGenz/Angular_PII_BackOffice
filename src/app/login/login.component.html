@@ -1,14 +1,20 @@
-<form id="loginForm" [formGroup]="accountCredentialsForm">
+<form class="formOffice" [formGroup]="accountCredentialsForm">
     <fieldset>
         <legend>Authentification</legend>
         <p>
                 <mat-form-field>
                     <input matInput placeholder="Nom d'utilisateur" formControlName="username"/>
+                    <mat-error *ngIf="accountCredentialsForm.get('username').hasError('required')">
+                        Le nom d'utilisateur est <strong>requis</strong>
+                    </mat-error>
                 </mat-form-field>
             </p>
             <p>
                 <mat-form-field>
                     <input type="password" matInput placeholder="Mot de passe" formControlName="password"/>
+                    <mat-error *ngIf="accountCredentialsForm.get('password').hasError('required')">
+                        Le mot de passe est <strong>requis</strong>
+                    </mat-error>
                 </mat-form-field>
             </p>
             <p>

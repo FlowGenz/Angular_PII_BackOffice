@@ -1,4 +1,4 @@
-#loginForm {
+.formOffice {
     min-width: 150px;
     max-width: 500px;
     width: 100%;
@@ -8,6 +8,11 @@
 
 form {
     margin-top: 150px;
+}
+
+legend {
+    color: steelblue;
+    font-style:italic;
 }
 
 form p {

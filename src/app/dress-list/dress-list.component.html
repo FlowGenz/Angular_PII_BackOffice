@@ -1,40 +1,58 @@
-<table mat-table [dataSource]="dataSource">
+<div id="management">
+    <span>Actions</span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="'/dressForm'">
+            <span>Ajouter</span>
+        </button>
+        <button mat-menu-item [routerLink]="'/dressForm'">
+            <span>Modifier</span>
+        </button>
+        <button mat-menu-item>
+            <span>Supprimer</span>
+        </button>
+    </mat-menu>
+</div>
+<div>
+    <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-    
-    <ng-container matColumnDef="nom">
-        <th mat-header-cell *matHeaderCellDef> Nom </th>
-        <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
-    </ng-container>
-    
-    <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef> Description </th>
-        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-    </ng-container>
+        <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef> Nom </th>
+            <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="disponibilite">
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="disponibilite">
             <th mat-header-cell *matHeaderCellDef> Disponibilite </th>
             <td mat-cell *matCellDef="let element"> {{element.disponibilite}} </td>
-    </ng-container>
+        </ng-container>
 
-    <ng-container matColumnDef="dateDebutDisponibilite">
+        <ng-container matColumnDef="dateDebutDisponibilite">
             <th mat-header-cell *matHeaderCellDef> Date debut disponibilite </th>
             <td mat-cell *matCellDef="let element"> {{element.dateDebutDisponibilite}} </td>
-    </ng-container>
+        </ng-container>
 
-    <ng-container matColumnDef="dateFinDisponibilite">
+        <ng-container matColumnDef="dateFinDisponibilite">
             <th mat-header-cell *matHeaderCellDef> Date fin disponibilite </th>
             <td mat-cell *matCellDef="let element"> {{element.dateFinDisponibilite}} </td>
-    </ng-container>
+        </ng-container>
 
-    <ng-container matColumnDef="partenaireId">
+        <ng-container matColumnDef="partenaireId">
             <th mat-header-cell *matHeaderCellDef> Partenaire Id </th>
             <td mat-cell *matCellDef="let element"> {{element.partenaireId}} </td>
-    </ng-container>
-    
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
