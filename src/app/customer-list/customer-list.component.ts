@@ -10,7 +10,7 @@ import { CustomerService } from 'src/app/customer.service';
 
 export class CustomerListComponent implements OnInit {
 
-  displayedColumns: string[] = ['username', 'nom', 'password', 'prenom', 'nom', 'adresseMail',
+  displayedColumns: string[] = ['username', 'password', 'prenom', 'nom', 'adresseMail',
                                 'numeroTelephone', 'adresse', 'pointsFidelite'];
   dataSource: Array<Customer>;
 
