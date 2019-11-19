@@ -27,7 +27,7 @@ import { RegisterComponent } from './register/register.component';
     OrderFormComponent,
     ConnectionScreenComponent,
     LoginComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +36,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,10 +8,13 @@ import { CustomerService } from 'src/app/customer.service';
   styleUrls: ['./customer-list.component.css']
 })
 
+/*Il faut plus tard voir pour reduire et centralisé la création de l'HTML pour les listes*/
+
 export class CustomerListComponent implements OnInit {
 
-  displayedColumns: string[] = ['username', 'nom', 'password', 'prenom', 'nom', 'adresseMail',
+  displayedColumns: string[] = ['username', 'password', 'nom', 'prenom', 'adresseMail',
                                 'numeroTelephone', 'adresse', 'pointsFidelite'];
+
   dataSource: Array<Customer>;
 
   constructor(private service: CustomerService) { }
