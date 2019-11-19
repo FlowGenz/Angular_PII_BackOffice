@@ -9,11 +9,13 @@ export class CustomerService {
   customerList: Array<Customer>;
 
   constructor() { 
-    let customer1 : Customer = <Customer> { id: 1, dateFacturation: null, dateLivraison: null, adresseFacturation: "Rue de l'aveugle",
-                                    adresseLivraison: "même que facturatio,", estValide: true, clientId: 1267};
+    let customer1 : Customer = <Customer> { username: "warrior5060", password: "MyPassword", prenom: "Joris", 
+                                            nom: "Zonowatnik", adresseMail: "zonoj@hotmail.com", numeroTelephone: "0499 15 36 92", adresse: "Rue des somnalant, 30", 
+                                            pointsFidelite: 150};
 
-    let customer2 : Customer = <Customer> { id: 2, dateFacturation: null, dateLivraison: null, adresseFacturation: "Rue de l'aveugle",
-                                    adresseLivraison: "", estValide: true, clientId: 124567};
+    let customer2 : Customer = <Customer> { username: "Xx_Nightware_xX", password: "HisPassword", prenom: "Florian", 
+                                            nom: "Janssens", adresseMail: "jansf@hotmail.com", numeroTelephone: "0499 67 39 23", adresse: "Rue de la plèbe, 30", 
+                                            pointsFidelite: 30};
 
     this.customerList = new Array<Customer>();                                
     this.customerList.push(customer1); 

@@ -10,9 +10,9 @@ import { OrderService } from 'src/app/order.service';
   styleUrls: ['./order-list.component.css']
 })
 export class OrderListComponent implements OnInit {
-
-  displayedColumns: string[] = ['id', 'nom', 'description', 'disponibilite', 'dateDebutDisponibilite',
-                                'dateFinDisponibilite', 'partenaireId'];
+  
+  displayedColumns: string[] = ['id', 'dateFacturation', 'dateLivraison', 'adresseFacturation', 'adresseLivraison',
+                                'estValide', 'clientId'];
   dataSource: Array<Order>;
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private service: OrderService) { }
