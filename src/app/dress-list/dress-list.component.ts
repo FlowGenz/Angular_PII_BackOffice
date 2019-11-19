@@ -12,16 +12,13 @@ import { Validators } from '@angular/forms';
 })
 export class DressListComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'nom', 'description'];
-
-  listDress: Array<Dress>;
-  dataSource = this.listDress;
-  
+  displayedColumns: string[] = ['id', 'nom', 'description', 'disponibilite', 'dateDebutDisponibilite',
+                                'dateFinDisponibilite', 'partenaireId'];
+  dataSource: Array<Dress>;
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private service: DressService) { }
 
   ngOnInit() {
-    this.listDress = this.service.getAll();
+    this.dataSource = this.service.getAll();
   }
-
 }
