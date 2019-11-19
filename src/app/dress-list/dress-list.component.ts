@@ -42,6 +42,7 @@ export class DressListComponent implements OnInit {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
+    this.dataSource.paginator = this.paginator;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. 
