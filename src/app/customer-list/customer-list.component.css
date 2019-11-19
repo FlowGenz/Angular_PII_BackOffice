@@ -7,3 +7,8 @@ table {
     margin-bottom: 5px;
     text-align: right;
 }
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}

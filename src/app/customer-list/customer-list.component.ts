@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Customer } from '../model/Customer';
 import { CustomerService } from 'src/app/customer.service';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-customer-list',
@@ -16,11 +17,18 @@ export class CustomerListComponent implements OnInit {
   displayedColumns: string[] = ['username', 'password', 'prenom', 'nom', 'adresseMail',
                                 'numeroTelephone', 'adresse', 'pointsFidelite'];
 
-  dataSource: Array<Customer>;
+  dataSource: MatTableDataSource<Customer>;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private service: CustomerService) { }
 
   ngOnInit() {
-    this.dataSource = this.service.getAll();
+    this.dataSource = new MatTableDataSource(this.service.getAll());
+  }
+
+
+  applyFilter(filterValue: String){
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
