@@ -3,7 +3,6 @@ import { Dress } from '../model/Dress';
 import { DressService } from '../dress.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material';
-import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-dress-list',
