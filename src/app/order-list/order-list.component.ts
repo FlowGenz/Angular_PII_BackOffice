@@ -6,7 +6,7 @@ import { OrderService } from 'src/app/order.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material';
 
-const LABEL_ORDER_PAGINATOR: string = "Nombre de commande client par page :";
+const LABEL_ORDER_PAGINATOR: string = "Nombre de commandes client par page :";
 
 @Component({
   selector: 'app-order-list',
