@@ -6,6 +6,8 @@ import { OrderService } from 'src/app/order.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material';
 
+const LABEL_ORDER_PAGINATOR: string = "Nombre de commande client par page :";
+
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
@@ -25,6 +27,8 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.service.getAll());
+    this.paginator._intl.itemsPerPageLabel = LABEL_ORDER_PAGINATOR;
+    this.dataSource.paginator = this.paginator;
   }
 
 

@@ -4,6 +4,8 @@ import { CustomerService } from 'src/app/customer.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material';
 
+const LABEL_CUSTOMER_PAGINATOR: string = "Nombre de clients par page :";
+
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
@@ -25,6 +27,8 @@ export class CustomerListComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.service.getAll());
+    this.paginator._intl.itemsPerPageLabel = LABEL_CUSTOMER_PAGINATOR;
+    this.dataSource.paginator = this.paginator;
   }
 
 
