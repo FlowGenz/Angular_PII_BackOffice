@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { getFrenchPaginatorIntl } from './french-paginator-intl';
+import { MatPaginatorIntl } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,7 @@ import { RegisterComponent } from './register/register.component';
     OrderFormComponent,
     ConnectionScreenComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,9 +38,12 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-  
   ],
-  providers: [],
+
+  //Ce rensigner sur providers
+  providers: [ 
+    { provide:MatPaginatorIntl, useValue: getFrenchPaginatorIntl() }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

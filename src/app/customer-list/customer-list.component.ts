@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Customer } from '../model/Customer';
 import { CustomerService } from 'src/app/customer.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 
 const LABEL_CUSTOMER_PAGINATOR: string = "Nombre de clients par page :";
 
