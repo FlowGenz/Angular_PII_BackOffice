@@ -18,6 +18,18 @@ export class DressListComponent implements OnInit {
 
   displayedColumns: string[] = ['select', 'id', 'nom', 'description', 'disponibilite', 'dateDebutDisponibilite',
                                 'dateFinDisponibilite', 'partenaireId'];
+
+  displayedColumnsBis: string[][] = [
+                                      //['select', 'select'],
+                                      ['id', 'id'], 
+                                      ['nom', 'nom'], 
+                                      ['description', 'description'], 
+                                      ['disponibilite', 'disponibilite'], 
+                                      ['dateDebutDisponibilite', 'Date de debut disponibilite'],
+                                      ['dateFinDisponibilite', 'Date de fin disponibilité'], 
+                                      ['partenaireId', 'partenaire id']
+                                    ];
+
   dataSource: MatTableDataSource<Dress>;
 
   selection = new SelectionModel<Dress>(false, []);
@@ -26,7 +38,6 @@ export class DressListComponent implements OnInit {
 
   constructor(private service: DressService) { }
 
-  
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.service.getAll());
     this.paginator._intl.itemsPerPageLabel = LABEL_RANGE_DRESS_PAGINATOR;
@@ -41,5 +52,9 @@ export class DressListComponent implements OnInit {
   checkboxLabel(row?: Dress): string {
     if (row) 
         return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
+  }
+
+  fisrtColumn( columnName:String ):boolean {
+    return columnName == 'select';
   }
 }

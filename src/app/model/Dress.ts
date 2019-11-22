@@ -11,7 +11,6 @@ export interface IDress {
 
 export class Dress implements IDress {
     
-
     constructor(
         public id: number,
         public nom: string,

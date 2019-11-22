@@ -20,8 +20,7 @@ export class Customer implements ICustomer {
         public adresseMail: string,
         public numeroTelephone: string,
         public adresse: string,
-        public pointsFidelite: number
-        ) {
+        public pointsFidelite: number) {
 
     }
 }

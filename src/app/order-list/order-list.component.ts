@@ -5,6 +5,7 @@ import { Order } from 'src/app/model/Order';
 import { OrderService } from 'src/app/order.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material';
+import {SelectionModel} from '@angular/cdk/collections';
 
 const LABEL_ORDER_PAGINATOR: string = "Nombre de commandes client par page :";
 
@@ -17,8 +18,19 @@ export class OrderListComponent implements OnInit {
   
   displayedColumns: string[] = ['id', 'dateFacturation', 'dateLivraison', 'adresseFacturation', 'adresseLivraison',
                                 'estValide', 'clientId'];
+
+  displayedColumnsBis: string[][] = [
+                                      ['id', 'id'], 
+                                      ['dateFacturation', 'Date de facturation'], 
+                                      ['dateLivraison', 'Date de livraison'], 
+                                      ['adresseFacturation', 'Adresse de facturation'], 
+                                      ['adresseLivraison', 'Adresse de livraison'],
+                                      ['estValide', 'est valide'], 
+                                      ['clientId', 'client id']
+                                    ];
   dataSource: MatTableDataSource<Order>;
 
+  selection = new SelectionModel<Order>(false, []);
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -34,6 +46,16 @@ export class OrderListComponent implements OnInit {
 
   applyFilter(filterValue: String){
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: Order): string {
+    if (row) 
+        return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
+  }
+
+  fisrtColumn( columnName:String ):boolean {
+    return columnName == 'select';
   }
 
 }
