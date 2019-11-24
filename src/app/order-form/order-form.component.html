@@ -1,1 +1,61 @@
-<p>order-form works!</p>
+<form class="formOffice" [formGroup]="orderForm">
+    <fieldset>
+        <legend>Commande</legend>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Id" formControlName="id" />
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="date" placeholder="Date de facturation" formControlName="billingDate" required />
+                <mat-error *ngIf="orderForm.get('billingDate').hasError('required')">
+                    Date de facturation <strong>requise</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="date" placeholder="Date de livraison" formControlName="deliveryDate" required />
+                <mat-error *ngIf="orderForm.get('deliveryDate').hasError('required')">
+                    Date de livraison <strong>requise</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" required placeholder="Adresse de facturation"
+                    formControlName="billingAddress">
+                <mat-error *ngIf="orderForm.get('billingAddress').hasError('required')">
+                    Adresse de facturation <strong>requise</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" required placeholder="Adresse de livraison"
+                    formControlName="deliveryAddress">
+                <mat-error *ngIf="orderForm.get('deliveryAddress').hasError('required')">
+                    Adresse de livraison <strong>requise</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <!--COMBOBOX PARTENAIRE-->
+            <mat-form-field>
+                <mat-label>Client</mat-label>
+                <mat-select formControlName="customerId" required>
+                    <mat-option *ngFor="let customer of customers" [value]="customer.id">
+                        {{customer.lastName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-checkbox formControlName="isValid">Valide</mat-checkbox>
+        </p>
+        <p>
+            <button mat-raised-button color="primary" type="submit">Modifier commande</button>
+        </p>
+    </fieldset>
+</form>
