@@ -1,23 +1,23 @@
 export interface IOrder {
     id: number;
-    dateFacturation: Date;
-    dateLivraison: Date;
-    adresseFacturation: string;
-    adresseLivraison: string;
-    estValide: boolean;
-    clientId: number;
+    billingDate: Date;
+    deliveryDate: Date;
+    billingAddress: string;
+    deliveryAddress: string;
+    isValid: boolean;
+    customerId: number;
 }
 
 export class Order implements IOrder {
     
     constructor(
         public id: number,
-        public dateFacturation: Date,
-        public dateLivraison: Date,
-        public adresseFacturation: string,
-        public adresseLivraison: string,
-        public estValide: boolean,
-        public clientId: number) {
+        public billingDate: Date,
+        public deliveryDate: Date,
+        public billingAddress: string,
+        public deliveryAddress: string,
+        public isValid: boolean,
+        public customerId: number) {
 
         }
 }

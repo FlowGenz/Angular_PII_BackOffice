@@ -39,4 +39,9 @@ export class CustomerFormComponent implements OnInit {
       parseInt(this.route.snapshot.paramMap.get("pointsFidelite")));
   }
 
+  submitForm() {
+    this.customer = this.customerForm.value;
+    console.log(this.customer);
+  }
+
 }

@@ -2,12 +2,12 @@ export interface ICustomer {
     id: number;
     username: string;
     password: string;
-    prenom: string;
-    nom: string;
-    adresseMail: string;
-    numeroTelephone: string;
-    adresse: string;
-    pointsFidelite: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    address: string;
+    fidelityPoints: number;
 }
 
 export class Customer implements ICustomer {
@@ -15,12 +15,12 @@ export class Customer implements ICustomer {
     constructor(public id: number,
         public username: string,
         public password: string,
-        public prenom: string,
-        public nom: string,
-        public adresseMail: string,
-        public numeroTelephone: string,
-        public adresse: string,
-        public pointsFidelite: number) {
+        public firstName: string,
+        public lastName: string,
+        public email: string,
+        public phoneNumber: string,
+        public address: string,
+        public fidelityPoints: number) {
 
     }
 }

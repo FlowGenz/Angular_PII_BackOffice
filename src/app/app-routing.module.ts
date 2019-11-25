@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ConnectionScreenComponent } from './connection-screen/connection-screen.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { DressListComponent } from './dress-list/dress-list.component';
 import { OrderListComponent } from './order-list/order-list.component';
@@ -12,7 +11,7 @@ import { DressFormComponent } from './dress-form/dress-form.component';
 
 
 const routes: Routes = [
-  {path: '', component: ConnectionScreenComponent},
+  {path: '', component: RegisterComponent},
   {path: 'customerList', component: CustomerListComponent},
   {path: 'customerForm', component: CustomerFormComponent},
   {path: 'dressList', component: DressListComponent},

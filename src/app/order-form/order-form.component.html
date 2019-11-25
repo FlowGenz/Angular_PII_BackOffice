@@ -1,4 +1,4 @@
-<form class="formOffice" [formGroup]="orderForm">
+<form class="formOffice" [formGroup]="orderForm" (ngSubmit)="submitForm()">
     <fieldset>
         <legend>Commande</legend>
         <p>
@@ -41,12 +41,11 @@
             </mat-form-field>
         </p>
         <p>
-            <!--COMBOBOX PARTENAIRE-->
             <mat-form-field>
                 <mat-label>Client</mat-label>
                 <mat-select formControlName="customerId" required>
                     <mat-option *ngFor="let customer of customers" [value]="customer.id">
-                        {{customer.lastName}}
+                        {{customer.nom}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
