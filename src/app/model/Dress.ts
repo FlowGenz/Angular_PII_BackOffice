@@ -1,25 +1,25 @@
 export interface IDress {
     id: number;
-    nom: string;
+    lastName: string;
     description: string;
-    prix: number;
-    disponibilite: boolean;
-    dateDebutDisponibilite: Date;
-    dateFinDisponibilite: Date;
-    partenaireId: number;
+    price: number;
+    availability: boolean;
+    startAvailabilityDate: Date;
+    endAvailabilityDate: Date;
+    partnerId: number;
 }
 
 export class Dress implements IDress {
     
     constructor(
         public id: number,
-        public nom: string,
+        public lastName: string,
         public description: string,
-        public prix: number,
-        public disponibilite: boolean,
-        public dateDebutDisponibilite: Date,
-        public dateFinDisponibilite: Date,
-        public partenaireId: number) {
+        public price: number,
+        public availability: boolean,
+        public startAvailabilityDate: Date,
+        public endAvailabilityDate: Date,
+        public partnerId: number) {
             
         }
 }
