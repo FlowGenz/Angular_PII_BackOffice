@@ -9,28 +9,28 @@ export class DressService {
   dressList: Array<Dress>;
 
   constructor() { 
-    let dress1 : Dress = <Dress> { id: 1, lastName: "bleu", description: "robe bleu", price: 1000,
+    let dress1 : Dress = <Dress> { id: 1, name: "bleu", description: "robe bleu", price: 1000,
                                   availability: false,  startAvailabilityDate: null, endAvailabilityDate: null,
                                   partnerId: 124567};
-    let dress2 : Dress = <Dress> { id: 2, lastName: "rouge", description: "robe rouge", price: 1300,
+    let dress2 : Dress = <Dress> { id: 2, name: "rouge", description: "robe rouge", price: 1300,
                                   availability: false,  startAvailabilityDate: null, endAvailabilityDate: null,
                                   partnerId: 87567};
-    let dress3 : Dress = <Dress> { id: 3, lastName: "bleu", description: "robe bleu", price: 1000,
+    let dress3 : Dress = <Dress> { id: 3, name: "bleu", description: "robe bleu", price: 1000,
                                   availability: false,  startAvailabilityDate: null, endAvailabilityDate: null,
                                   partnerId: 124567};
-    let dress4 : Dress = <Dress> { id: 4, lastName: "rouge", description: "robe rouge", price: 1300,
+    let dress4 : Dress = <Dress> { id: 4, name: "rouge", description: "robe rouge", price: 1300,
                                   availability: false,  startAvailabilityDate: null, endAvailabilityDate: null,
                                   partnerId: 87567};
-    let dress5 : Dress = <Dress> { id: 5, lastName: "bleu", description: "robe bleu", price: 1000,
+    let dress5 : Dress = <Dress> { id: 5, name: "bleu", description: "robe bleu", price: 1000,
                                   availability: false,  startAvailabilityDate: null, endAvailabilityDate: null,
                                   partnerId: 124567};
-    let dress6 : Dress = <Dress> { id: 6, lastName: "rouge", description: "robe rouge", price: 1300,
+    let dress6 : Dress = <Dress> { id: 6, name: "rouge", description: "robe rouge", price: 1300,
                                   availability: false,  startAvailabilityDate: null, endAvailabilityDate: null,
                                   partnerId: 87567};
-    let dress7 : Dress = <Dress> { id: 7, lastName: "bleu", description: "robe bleu", price: 1000,
+    let dress7 : Dress = <Dress> { id: 7, name: "bleu", description: "robe bleu", price: 1000,
                                   availability: false,  startAvailabilityDate: null, endAvailabilityDate: null,
                                   partnerId: 124567};
-    let dress8 : Dress = <Dress> { id: 8, lastName: "rouge", description: "robe rouge", price: 1300,
+    let dress8 : Dress = <Dress> { id: 8, name: "rouge", description: "robe rouge", price: 1300,
                                   availability: false,  startAvailabilityDate: null, endAvailabilityDate: null,
                                   partnerId: 87567};
     this.dressList = new Array<Dress>();                                

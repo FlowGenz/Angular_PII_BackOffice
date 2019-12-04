@@ -24,18 +24,18 @@ const LABEL_RANGE_DRESS_PAGINATOR: string = "Nombre de robes par page :";
 
 export class DressListComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'id', 'nom', 'description', 'disponibilite', 'dateDebutDisponibilite',
-                                'dateFinDisponibilite', 'partenaireId'];
+  displayedColumns: string[] = ['select', 'id', 'name', 'description', 'availability', 'startAvailabilityDate',
+                                'endAvailabilityDate', 'partnerId'];
 
   displayedColumnsBis: string[][] = [
                                       ['select', 'select'],
                                       ['id', 'id'], 
-                                      ['nom', 'nom'], 
+                                      ['name', 'nom'], 
                                       ['description', 'description'], 
-                                      ['disponibilite', 'disponibilite'], 
-                                      ['dateDebutDisponibilite', 'Date de debut disponibilite'],
-                                      ['dateFinDisponibilite', 'Date de fin disponibilité'], 
-                                      ['partenaireId', 'partenaire id']
+                                      ['availability', 'disponibilite'], 
+                                      ['startAvailabilityDate', 'Date de debut disponibilite'],
+                                      ['endAvailabilityDate', 'Date de fin disponibilité'], 
+                                      ['partnerId', 'partenaire id']
                                     ];
 
   dataSource: MatTableDataSource<Dress>;

@@ -11,11 +11,11 @@ export class CustomerService {
   constructor() { 
     let customer1 : Customer = <Customer> { username: "warrior5060", password: "MyPassword", firstName: "Joris", 
                                             lastName: "Zonowatnik", email: "zonoj@hotmail.com", phoneNumber: "0499 15 36 92", address: "Rue des somnalant, 30", 
-                                            fidelityPoints: 150};
+                                            loyaltyPoints: 150};
 
     let customer2 : Customer = <Customer> { username: "Xx_Nightware_xX", password: "HisPassword", firstName: "Florian", 
                                             lastName: "Janssens", email: "jansf@hotmail.com", phoneNumber: "0499 67 39 23", address: "Rue de la plèbe, 30", 
-                                            fidelityPoints: 30};
+                                            loyaltyPoints: 30};
 
     this.customerList = new Array<Customer>();                                
     this.customerList.push(customer1); 
