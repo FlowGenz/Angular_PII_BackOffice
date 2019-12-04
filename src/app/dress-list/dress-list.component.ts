@@ -4,13 +4,21 @@ import { DressService } from '../dress.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {SelectionModel} from '@angular/cdk/collections';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 const LABEL_RANGE_DRESS_PAGINATOR: string = "Nombre de robes par page :";
 
 @Component({
   selector: 'app-dress-list',
   templateUrl: './dress-list.component.html',
-  styleUrls: ['./dress-list.component.css']
+  styleUrls: ['./dress-list.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 
 
@@ -20,7 +28,7 @@ export class DressListComponent implements OnInit {
                                 'dateFinDisponibilite', 'partenaireId'];
 
   displayedColumnsBis: string[][] = [
-                                      //['select', 'select'],
+                                      ['select', 'select'],
                                       ['id', 'id'], 
                                       ['nom', 'nom'], 
                                       ['description', 'description'], 
@@ -33,6 +41,10 @@ export class DressListComponent implements OnInit {
   dataSource: MatTableDataSource<Dress>;
 
   selection = new SelectionModel<Dress>(false, []);
+
+  
+
+  expandedElement: Dress | null;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -54,7 +66,7 @@ export class DressListComponent implements OnInit {
         return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
   }
 
-  fisrtColumn( columnName:String ):boolean {
-    return columnName == 'select';
+  getDressSelected() : Dress{
+    return this.selection.selected.values[0].id;
   }
 }

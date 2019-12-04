@@ -61,4 +61,7 @@ export class CustomerListComponent implements OnInit {
     return columnName == 'select';
   }
 
+  getCustomerSelected() : Customer{
+    return this.selection.selected.values[0];
+  }
 }

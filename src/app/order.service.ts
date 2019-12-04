@@ -10,7 +10,7 @@ export class OrderService {
 
   constructor() { 
     let order1 : Order = <Order> { id: 1, dateFacturation: null, dateLivraison: null, adresseFacturation: "Rue de l'aveugle",
-                                    adresseLivraison: "même que facturatio,", estValide: false, clientId: 1267};
+                                    adresseLivraison: "même que facturation", estValide: false, clientId: 1267};
 
     let dorder2 : Order = <Order> { id: 2, dateFacturation: null, dateLivraison: null, adresseFacturation: "Rue de l'aveugle",
                                     adresseLivraison: "Inconnue au bataillon", estValide: true, clientId: 124567};
