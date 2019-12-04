@@ -16,17 +16,17 @@ const LABEL_ORDER_PAGINATOR: string = "Nombre de commandes client par page :";
 })
 export class OrderListComponent implements OnInit {
   
-  displayedColumns: string[] = ['id', 'dateFacturation', 'dateLivraison', 'adresseFacturation', 'adresseLivraison',
-                                'estValide', 'clientId'];
+  displayedColumns: string[] = ['id', 'billingDate', 'deliveryDate', 'billingAddress', 'deliveryAddress',
+                                'isValid', 'customerId'];
 
   displayedColumnsBis: string[][] = [
                                       ['id', 'id'], 
-                                      ['dateFacturation', 'Date de facturation'], 
-                                      ['dateLivraison', 'Date de livraison'], 
-                                      ['adresseFacturation', 'Adresse de facturation'], 
-                                      ['adresseLivraison', 'Adresse de livraison'],
-                                      ['estValide', 'est valide'], 
-                                      ['clientId', 'client id']
+                                      ['billingDate', 'Date de facturation'], 
+                                      ['deliveryDate', 'Date de livraison'], 
+                                      ['billingAddress', 'Adresse de facturation'], 
+                                      ['deliveryAddress', 'Adresse de livraison'],
+                                      ['isValid', 'est valide'], 
+                                      ['customerId', 'client id']
                                     ];
   dataSource: MatTableDataSource<Order>;
 

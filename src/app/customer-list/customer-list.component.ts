@@ -18,18 +18,18 @@ const LABEL_CUSTOMER_PAGINATOR: string = "Nombre de clients par page :";
 
 export class CustomerListComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'username', 'password', 'prenom', 'nom', 'adresseMail',
-                                'numeroTelephone', 'adresse', 'pointsFidelite'];
+  displayedColumns: string[] = ['select', 'username', 'password', 'firstName', 'lastName', 'email',
+                                'phoneNumber', 'address', 'loyaltyPoints'];
 
   displayedColumnsBis: string[][] = [
                                       ['username', "nom d'utilisateur"], 
                                       ['password', 'mot de passe'],  
-                                      ['prenom', 'prénom'], 
-                                      ['nom', 'nom'],
-                                      ['adresseMail', 'adresseMail'], 
-                                      ['numeroTelephone', 'numeroTelephone'],
-                                      ['adresse', 'Adress'], 
-                                      ['pointsFidelite', 'Points de fidelite']
+                                      ['firstName', 'prénom'], 
+                                      ['lastName', 'nom'],
+                                      ['email', 'adresseMail'], 
+                                      ['phoneNumber', 'numeroTelephone'],
+                                      ['address', 'Adress'], 
+                                      ['loyaltyPoints', 'Points de fidelite']
                                     ];
 
   dataSource: MatTableDataSource<Customer>;

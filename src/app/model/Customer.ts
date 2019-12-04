@@ -7,7 +7,7 @@ export interface ICustomer {
     email: string;
     phoneNumber: string;
     address: string;
-    fidelityPoints: number;
+    loyaltyPoints: number;
 }
 
 export class Customer implements ICustomer {
@@ -20,7 +20,7 @@ export class Customer implements ICustomer {
         public email: string,
         public phoneNumber: string,
         public address: string,
-        public fidelityPoints: number) {
+        public loyaltyPoints: number) {
 
     }
 }

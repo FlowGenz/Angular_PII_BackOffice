@@ -1,6 +1,6 @@
 export interface IDress {
     id: number;
-    lastName: string;
+    name: string;
     description: string;
     price: number;
     availability: boolean;
@@ -13,7 +13,7 @@ export class Dress implements IDress {
     
     constructor(
         public id: number,
-        public lastName: string,
+        public name: string,
         public description: string,
         public price: number,
         public availability: boolean,
