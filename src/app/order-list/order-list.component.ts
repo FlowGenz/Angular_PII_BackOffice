@@ -16,7 +16,7 @@ const LABEL_ORDER_PAGINATOR: string = "Nombre de commandes client par page :";
 })
 export class OrderListComponent implements OnInit {
   
-  displayedColumns: string[] = ['id', 'billingDate', 'deliveryDate', 'billingAddress', 'deliveryAddress',
+  displayedColumns: string[] = ['select', 'id', 'billingDate', 'deliveryDate', 'billingAddress', 'deliveryAddress',
                                 'isValid', 'customerId'];
 
   displayedColumnsBis: string[][] = [

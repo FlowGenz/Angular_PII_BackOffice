@@ -24,11 +24,12 @@ const LABEL_RANGE_DRESS_PAGINATOR: string = "Nombre de robes par page :";
 
 export class DressListComponent implements OnInit {
 
+
+  //ici tu as ajoute le nom de l'attribut de la robe
   displayedColumns: string[] = ['select', 'id', 'name', 'description', 'availability', 'startAvailabilityDate',
                                 'endAvailabilityDate', 'partnerId'];
-
+  //ici tu as ajoute le nom de l'attribut de la robe et à droite le nom du titre que tu veux a t'as colonne
   displayedColumnsBis: string[][] = [
-                                      ['select', 'select'],
                                       ['id', 'id'], 
                                       ['name', 'nom'], 
                                       ['description', 'description'], 
