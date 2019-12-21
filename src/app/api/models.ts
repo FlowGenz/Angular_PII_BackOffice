@@ -1,0 +1,10 @@
+export { CustomerDTO } from './models/customer-dto';
+export { ProblemDetails } from './models/problem-details';
+export { OrderLine } from './models/order-line';
+export { DressOrder } from './models/dress-order';
+export { Favorites } from './models/favorites';
+export { User } from './models/user';
+export { Dress } from './models/dress';
+export { DressDTO } from './models/dress-dto';
+export { FavoriteDTO } from './models/favorite-dto';
+export { PartnerDTO } from './models/partner-dto';

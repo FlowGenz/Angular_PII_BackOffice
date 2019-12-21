@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Customer } from '../model/Customer';
-import { CustomerService } from 'src/app/customer.service';
+import { CustomerService } from 'src/app/api/services/customer.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
 import {SelectionModel} from '@angular/cdk/collections';
+import { CustomerDTO } from '../api/models';
 
 const LABEL_CUSTOMER_PAGINATOR: string = "Nombre de clients par page :";
 
@@ -32,7 +33,7 @@ export class CustomerListComponent implements OnInit {
                                       ['loyaltyPoints', 'Points de fidelite']
                                     ];
 
-  dataSource: MatTableDataSource<Customer>;
+  dataSource: MatTableDataSource<CustomerDTO>;
 
   selection = new SelectionModel<Customer>(false, []);
 
@@ -41,9 +42,16 @@ export class CustomerListComponent implements OnInit {
   constructor(private service: CustomerService) { }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.service.getAll());
-    this.paginator._intl.itemsPerPageLabel = LABEL_CUSTOMER_PAGINATOR;
-    this.dataSource.paginator = this.paginator;
+    this.service.getCustomer().subscribe(
+      result => { 
+        this.dataSource = new MatTableDataSource(result);
+        this.paginator._intl.itemsPerPageLabel = LABEL_CUSTOMER_PAGINATOR;
+        this.dataSource.paginator = this.paginator;
+      },
+      error => console.log("Error has occured while getting customer", error),
+      () => console.log("Loading customer completed !")
+      );
+   
   }
 
 

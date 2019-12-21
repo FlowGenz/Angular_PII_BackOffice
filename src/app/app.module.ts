@@ -17,6 +17,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { getFrenchPaginatorIntl } from './french-paginator-intl';
 import { MatPaginatorIntl } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiModule } from './api/api.module';
 
 @NgModule({
   declarations: [
@@ -38,9 +40,11 @@ import { MatPaginatorIntl } from '@angular/material';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    HttpClientModule,
+    ApiModule.forRoot({rootUrl:"http://localhost:5000"})
   ],
 
-  //Ce rensigner sur providers
+  //Ce renseigner sur providers
   providers: [ 
     { provide:MatPaginatorIntl, useValue: getFrenchPaginatorIntl() }
   ],

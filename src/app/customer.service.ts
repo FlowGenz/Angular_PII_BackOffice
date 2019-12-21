@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Customer } from 'src/app/model/Customer';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
+  private readonly apiUrl: string;
   customerList: Array<Customer>;
 
-  constructor() { 
-    let customer1 : Customer = <Customer> { username: "warrior5060", password: "MyPassword", firstName: "Joris", 
+  constructor(private http : HttpClient) {
+    this.apiUrl = "http://localhost:5000/customer";
+    /*let customer1 : Customer = <Customer> { username: "warrior5060", password: "MyPassword", firstName: "Joris", 
                                             lastName: "Zonowatnik", email: "zonoj@hotmail.com", phoneNumber: "0499 15 36 92", address: "Rue des somnalant, 30", 
                                             loyaltyPoints: 150};
 
@@ -19,10 +22,14 @@ export class CustomerService {
 
     this.customerList = new Array<Customer>();                                
     this.customerList.push(customer1); 
-    this.customerList.push(customer2);
+    this.customerList.push(customer2);*/
   }
 
-  getAll() : Array<Customer>{
+  /*getAll() : Array<Customer>{
     return this.customerList;
+  }*/
+
+  getAllCustomer() {
+    return this.http.get<Customer>(this.apiUrl);
   }
 }
