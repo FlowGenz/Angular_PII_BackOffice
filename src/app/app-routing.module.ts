@@ -8,16 +8,17 @@ import { RegisterComponent } from './register/register.component';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { OrderFormComponent } from './order-form/order-form.component';
 import { DressFormComponent } from './dress-form/dress-form.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
-  {path: '', component: RegisterComponent},
-  {path: 'customerList', component: CustomerListComponent},
-  {path: 'customerForm', component: CustomerFormComponent},
-  {path: 'dressList', component: DressListComponent},
-  {path: 'dressForm', component: DressFormComponent},
-  {path: 'orderList', component: OrderListComponent},
-  {path: 'orderForm', component: OrderFormComponent},
+  {path: '', component: LoginComponent},
+  {path: 'customerList', component: CustomerListComponent, canActivate: [AuthGuard]},
+  {path: 'customerForm', component: CustomerFormComponent, canActivate: [AuthGuard]},
+  {path: 'dressList', component: DressListComponent, canActivate: [AuthGuard]},
+  {path: 'dressForm', component: DressFormComponent, canActivate: [AuthGuard]},
+  {path: 'orderList', component: OrderListComponent, canActivate: [AuthGuard]},
+  {path: 'orderForm', component: OrderFormComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
 ];
