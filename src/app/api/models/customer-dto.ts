@@ -7,5 +7,5 @@ export interface CustomerDTO {
   email: string;
   phoneNumber?: string;
   customerAddress: string;
-  loyaltyPoints?: number;
+  loyaltyPoints: number;
 }

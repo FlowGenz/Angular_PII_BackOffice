@@ -26,13 +26,13 @@ export class DressListComponent implements OnInit {
 
 
   //ici tu as ajoute le nom de l'attribut de la robe
-  displayedColumns: string[] = ['select', 'id', 'name', 'description', 'availability', 'startAvailabilityDate',
+  displayedColumns: string[] = ['select', 'id', 'name', 'availability', 'startAvailabilityDate',
                                 'endAvailabilityDate', 'partnerId'];
   //ici tu as ajoute le nom de l'attribut de la robe et à droite le nom du titre que tu veux a t'as colonne
   displayedColumnsBis: string[][] = [
                                       ['id', 'id'], 
                                       ['name', 'nom'], 
-                                      ['description', 'description'], 
+                                      //['description', 'description'], 
                                       ['availability', 'disponibilite'], 
                                       ['startAvailabilityDate', 'Date de debut disponibilite'],
                                       ['endAvailabilityDate', 'Date de fin disponibilité'], 
@@ -43,8 +43,6 @@ export class DressListComponent implements OnInit {
 
   selection = new SelectionModel<Dress>(false, []);
 
-  
-
   expandedElement: Dress | null;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -54,8 +52,7 @@ export class DressListComponent implements OnInit {
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.service.getAll());
     this.paginator._intl.itemsPerPageLabel = LABEL_RANGE_DRESS_PAGINATOR;
-    this.dataSource.paginator = this.paginator;
-  }
+    this.dataSource.paginator = this.paginator;}
 
   applyFilter(filterValue: String){
     this.dataSource.filter = filterValue.trim().toLowerCase();
