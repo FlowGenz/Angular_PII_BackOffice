@@ -15,6 +15,9 @@ import { Dress } from '../models/dress';
 class DressService extends __BaseService {
   static readonly getDressPath = '/Dress';
   static readonly postDressPath = '/Dress';
+  static readonly putDressPath = '/Dress';
+  static readonly getDressIdPath = '/Dress/{id}';
+  static readonly deleteDressDressIdPath = '/Dress/{dressId}';
 
   constructor(
     config: __Configuration,
@@ -26,7 +29,7 @@ class DressService extends __BaseService {
   /**
    * @return Success
    */
-  getDressResponse(): __Observable<__StrictHttpResponse<Array<DressDTO>>> {
+  getDressResponse(): __Observable<__StrictHttpResponse<DressDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -43,23 +46,24 @@ class DressService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<DressDTO>>;
+        return _r as __StrictHttpResponse<DressDTO>;
       })
     );
   }
   /**
    * @return Success
    */
-  getDress(): __Observable<Array<DressDTO>> {
+  getDress(): __Observable<DressDTO> {
     return this.getDressResponse().pipe(
-      __map(_r => _r.body as Array<DressDTO>)
+      __map(_r => _r.body as DressDTO)
     );
   }
 
   /**
    * @param body undefined
+   * @return Success
    */
-  postDressResponse(body?: Dress): __Observable<__StrictHttpResponse<null>> {
+  postDressResponse(body?: Dress): __Observable<__StrictHttpResponse<string>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -71,22 +75,131 @@ class DressService extends __BaseService {
       {
         headers: __headers,
         params: __params,
+        responseType: 'text'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<string>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  postDress(body?: Dress): __Observable<string> {
+    return this.postDressResponse(body).pipe(
+      __map(_r => _r.body as string)
+    );
+  }
+
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  putDressResponse(body?: Dress): __Observable<__StrictHttpResponse<string>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/Dress`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'text'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<string>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  putDress(body?: Dress): __Observable<string> {
+    return this.putDressResponse(body).pipe(
+      __map(_r => _r.body as string)
+    );
+  }
+
+  /**
+   * @param id undefined
+   * @return Success
+   */
+  getDressIdResponse(id: string): __Observable<__StrictHttpResponse<DressDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Dress/${id}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
         responseType: 'json'
       });
 
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
+        return _r as __StrictHttpResponse<DressDTO>;
       })
     );
   }
   /**
-   * @param body undefined
+   * @param id undefined
+   * @return Success
    */
-  postDress(body?: Dress): __Observable<null> {
-    return this.postDressResponse(body).pipe(
-      __map(_r => _r.body as null)
+  getDressId(id: string): __Observable<DressDTO> {
+    return this.getDressIdResponse(id).pipe(
+      __map(_r => _r.body as DressDTO)
+    );
+  }
+
+  /**
+   * @param dressId undefined
+   * @return Success
+   */
+  deleteDressDressIdResponse(dressId: string): __Observable<__StrictHttpResponse<string>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/Dress/${dressId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'text'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<string>;
+      })
+    );
+  }
+  /**
+   * @param dressId undefined
+   * @return Success
+   */
+  deleteDressDressId(dressId: string): __Observable<string> {
+    return this.deleteDressDressIdResponse(dressId).pipe(
+      __map(_r => _r.body as string)
     );
   }
 }

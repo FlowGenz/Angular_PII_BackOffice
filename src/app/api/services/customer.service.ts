@@ -8,16 +8,15 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { CustomerDTO } from '../models/customer-dto';
-import { User } from '../models/user';
-import { Favorites } from '../models/favorites';
-import { DressOrder } from '../models/dress-order';
-import { Dress } from '../models/dress';
 @Injectable({
   providedIn: 'root',
 })
 class CustomerService extends __BaseService {
   static readonly getCustomerPath = '/Customer';
   static readonly postCustomerPath = '/Customer';
+  static readonly putCustomerPath = '/Customer';
+  static readonly getCustomerUsernamePath = '/Customer/{username}';
+  static readonly deleteCustomerCustomerIdPath = '/Customer/{customerId}';
 
   constructor(
     config: __Configuration,
@@ -60,53 +59,89 @@ class CustomerService extends __BaseService {
   }
 
   /**
-   * @param params The `CustomerService.PostCustomerParams` containing the following parameters:
-   *
-   * - `Username`:
-   *
-   * - `UserPassword`:
-   *
-   * - `UserAddress`:
-   *
-   * - `PhoneNumber`:
-   *
-   * - `LoyaltyPoints`:
-   *
-   * - `LastName`:
-   *
-   * - `Id`:
-   *
-   * - `FirstName`:
-   *
-   * - `Favorites`:
-   *
-   * - `Email`:
-   *
-   * - `DressOrder`:
-   *
-   * - `Dress`:
-   *
+   * @param body undefined
    * @return Success
    */
-  postCustomerResponse(params: CustomerService.PostCustomerParams): __Observable<__StrictHttpResponse<User>> {
+  postCustomerResponse(body?: CustomerDTO): __Observable<__StrictHttpResponse<number>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-    if (params.Username != null) __params = __params.set('Username', params.Username.toString());
-    if (params.UserPassword != null) __params = __params.set('UserPassword', params.UserPassword.toString());
-    if (params.UserAddress != null) __params = __params.set('UserAddress', params.UserAddress.toString());
-    if (params.PhoneNumber != null) __params = __params.set('PhoneNumber', params.PhoneNumber.toString());
-    if (params.LoyaltyPoints != null) __params = __params.set('LoyaltyPoints', params.LoyaltyPoints.toString());
-    if (params.LastName != null) __params = __params.set('LastName', params.LastName.toString());
-    if (params.Id != null) __params = __params.set('Id', params.Id.toString());
-    if (params.FirstName != null) __params = __params.set('FirstName', params.FirstName.toString());
-    (params.Favorites || []).forEach(val => {if (val != null) __params = __params.append('Favorites', val.toString())});
-    if (params.Email != null) __params = __params.set('Email', params.Email.toString());
-    (params.DressOrder || []).forEach(val => {if (val != null) __params = __params.append('DressOrder', val.toString())});
-    (params.Dress || []).forEach(val => {if (val != null) __params = __params.append('Dress', val.toString())});
+    __body = body;
     let req = new HttpRequest<any>(
       'POST',
       this.rootUrl + `/Customer`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'text'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return (_r as HttpResponse<any>).clone({ body: parseFloat((_r as HttpResponse<any>).body as string) }) as __StrictHttpResponse<number>
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  postCustomer(body?: CustomerDTO): __Observable<number> {
+    return this.postCustomerResponse(body).pipe(
+      __map(_r => _r.body as number)
+    );
+  }
+
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  putCustomerResponse(body?: CustomerDTO): __Observable<__StrictHttpResponse<string>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    __body = body;
+    let req = new HttpRequest<any>(
+      'PUT',
+      this.rootUrl + `/Customer`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'text'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<string>;
+      })
+    );
+  }
+  /**
+   * @param body undefined
+   * @return Success
+   */
+  putCustomer(body?: CustomerDTO): __Observable<string> {
+    return this.putCustomerResponse(body).pipe(
+      __map(_r => _r.body as string)
+    );
+  }
+
+  /**
+   * @param username undefined
+   * @return Success
+   */
+  getCustomerUsernameResponse(username: string): __Observable<__StrictHttpResponse<CustomerDTO>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Customer/${username}`,
       __body,
       {
         headers: __headers,
@@ -117,65 +152,58 @@ class CustomerService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<User>;
+        return _r as __StrictHttpResponse<CustomerDTO>;
       })
     );
   }
   /**
-   * @param params The `CustomerService.PostCustomerParams` containing the following parameters:
-   *
-   * - `Username`:
-   *
-   * - `UserPassword`:
-   *
-   * - `UserAddress`:
-   *
-   * - `PhoneNumber`:
-   *
-   * - `LoyaltyPoints`:
-   *
-   * - `LastName`:
-   *
-   * - `Id`:
-   *
-   * - `FirstName`:
-   *
-   * - `Favorites`:
-   *
-   * - `Email`:
-   *
-   * - `DressOrder`:
-   *
-   * - `Dress`:
-   *
+   * @param username undefined
    * @return Success
    */
-  postCustomer(params: CustomerService.PostCustomerParams): __Observable<User> {
-    return this.postCustomerResponse(params).pipe(
-      __map(_r => _r.body as User)
+  getCustomerUsername(username: string): __Observable<CustomerDTO> {
+    return this.getCustomerUsernameResponse(username).pipe(
+      __map(_r => _r.body as CustomerDTO)
+    );
+  }
+
+  /**
+   * @param customerId undefined
+   * @return Success
+   */
+  deleteCustomerCustomerIdResponse(customerId: string): __Observable<__StrictHttpResponse<string>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/Customer/${customerId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'text'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<string>;
+      })
+    );
+  }
+  /**
+   * @param customerId undefined
+   * @return Success
+   */
+  deleteCustomerCustomerId(customerId: string): __Observable<string> {
+    return this.deleteCustomerCustomerIdResponse(customerId).pipe(
+      __map(_r => _r.body as string)
     );
   }
 }
 
 module CustomerService {
-
-  /**
-   * Parameters for postCustomer
-   */
-  export interface PostCustomerParams {
-    Username?: string;
-    UserPassword?: string;
-    UserAddress?: string;
-    PhoneNumber?: string;
-    LoyaltyPoints?: number;
-    LastName?: string;
-    Id?: number;
-    FirstName?: string;
-    Favorites?: Array<Favorites>;
-    Email?: string;
-    DressOrder?: Array<DressOrder>;
-    Dress?: Array<Dress>;
-  }
 }
 
 export { CustomerService }

@@ -1,7 +1,10 @@
 /* tslint:disable */
 export interface FavoriteDTO {
-  id?: number;
-  urlImage?: string;
-  dressName?: string;
-  dressPrice?: number;
+  id?: string;
+  urlImage: string;
+  dressName: string;
+  dressPrice: number;
+  available: boolean;
+  dressId: string;
+  customerId: string;
 }

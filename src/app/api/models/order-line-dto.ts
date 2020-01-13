@@ -1,13 +1,12 @@
 /* tslint:disable */
-import { Dress } from './dress';
-import { DressOrder } from './dress-order';
-export interface OrderLine {
+export interface OrderLineDTO {
   id?: string;
   dateBeginLocation?: string;
   dateEndLocation?: string;
   finalPrice: number;
+  dressName: string;
+  isDressAvailable: boolean;
+  dressUrlImage: string;
   dressOrderId: string;
   dressId: string;
-  dress?: Dress;
-  dressOrder?: DressOrder;
 }

@@ -1,12 +1,14 @@
 /* tslint:disable */
 export interface DressDTO {
-  id: number;
-  dressName: string;
-  describe: string;
-  price: number;
   available: boolean;
+  id: string;
+  description: string;
+  price: number;
+  size: string;
+  dressName: string;
   dateBeginAvailable: string;
   dateEndAvailable?: string;
-  partnerId: number;
+  partnerId: string;
   partnerName: string;
+  urlImage: string;
 }

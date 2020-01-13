@@ -1,4 +1,4 @@
-<form class="formOffice" [formGroup]="accountCredentialsForm">
+<form class="formOffice" [formGroup]="accountCredentialsForm" (ngSubmit)="submitForm()">
     <fieldset>
         <legend>Authentification</legend>
         <p>
@@ -18,7 +18,7 @@
                 </mat-form-field>
             </p>
             <p>
-                <button mat-raised-button type="submit" color="primary" (click)="login()">Se connecter</button>
+                <button mat-raised-button type="submit" color="primary">Se connecter</button>
             </p>
     </fieldset>
 </form>

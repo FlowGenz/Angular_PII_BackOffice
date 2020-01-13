@@ -21,6 +21,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  submitForm(): void {
+    if (this.accountCredentialsForm.valid) {
+      this.login();
+    }
+  }
+
   login(): void {
     this.authService.login().subscribe(() => {
       if(this.authService.isLoggedIn) {

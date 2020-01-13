@@ -7,12 +7,12 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { PartnerDTO } from '../models/partner-dto';
+import { LoginDTO } from '../models/login-dto';
 @Injectable({
   providedIn: 'root',
 })
-class PartnerService extends __BaseService {
-  static readonly getPartnerPath = '/Partner';
+class LoginService extends __BaseService {
+  static readonly postLoginPath = '/Login';
 
   constructor(
     config: __Configuration,
@@ -22,40 +22,43 @@ class PartnerService extends __BaseService {
   }
 
   /**
+   * @param body undefined
    * @return Success
    */
-  getPartnerResponse(): __Observable<__StrictHttpResponse<PartnerDTO>> {
+  postLoginResponse(body?: LoginDTO): __Observable<__StrictHttpResponse<string>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
+    __body = body;
     let req = new HttpRequest<any>(
-      'GET',
-      this.rootUrl + `/Partner`,
+      'POST',
+      this.rootUrl + `/Login`,
       __body,
       {
         headers: __headers,
         params: __params,
-        responseType: 'json'
+        responseType: 'text'
       });
 
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<PartnerDTO>;
+        return _r as __StrictHttpResponse<string>;
       })
     );
   }
   /**
+   * @param body undefined
    * @return Success
    */
-  getPartner(): __Observable<PartnerDTO> {
-    return this.getPartnerResponse().pipe(
-      __map(_r => _r.body as PartnerDTO)
+  postLogin(body?: LoginDTO): __Observable<string> {
+    return this.postLoginResponse(body).pipe(
+      __map(_r => _r.body as string)
     );
   }
 }
 
-module PartnerService {
+module LoginService {
 }
 
-export { PartnerService }
+export { LoginService }

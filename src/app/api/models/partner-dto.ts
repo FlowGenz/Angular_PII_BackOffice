@@ -1,5 +1,5 @@
 /* tslint:disable */
 export interface PartnerDTO {
-  id?: number;
+  id: string;
   username: string;
 }

@@ -58,7 +58,10 @@
         </p>
         <p>
             <mat-form-field>
-                <input matInput type="text" placeholder="Adresse" formControlName="address" />
+                <input matInput type="text" placeholder="Adresse" formControlName="address" required />
+                <mat-error *ngIf="customerForm.get('address').hasError('required')">
+                    Adresse <strong>requise</strong>
+                </mat-error>
             </mat-form-field>
         </p>
         <p>
