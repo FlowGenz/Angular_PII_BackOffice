@@ -15,13 +15,13 @@ export class DressFormComponent implements OnInit {
   private dress: Dress;
   private dressForm = this.formBuilder.group({
     id: [''],
-    name: [''],
-    description: [''],
-    price: ['', Validators.min(0)],
-    available: [''],
-    startAvailableDate: [''],
+    name: ['', Validators.required, Validators.minLength(2), Validators.maxLength(50)],
+    description: ['', Validators.required, Validators.minLength(2), Validators.maxLength(200)],
+    price: ['', Validators.required, Validators.min(0), Validators.max(9999.99)],
+    available: ['', Validators.required],
+    startAvailableDate: ['', Validators.required],
     endAvailableDate: [''],
-    partnerId: ['']
+    partnerId: ['', Validators.required]
   });
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private service: PartnerService) { }

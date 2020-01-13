@@ -17,12 +17,12 @@ export class OrderFormComponent implements OnInit {
   private order: Order;
   private orderForm = this.formBuilder.group({
     id: [''],
-    billingDate: [''],
-    deliveryDate: [''],
-    billingAddress: [''],
-    deliveryAddress: [''],
-    isValid: [''],
-    customerId: ['']
+    billingDate: ['', Validators.required],
+    deliveryDate: ['', Validators.required],
+    billingAddress: ['', Validators.required],
+    deliveryAddress: ['', Validators.required],
+    isValid: ['', Validators.required],
+    customerId: ['', Validators.required]
   });
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private service: CustomerService) { }

@@ -14,14 +14,14 @@ export class CustomerFormComponent implements OnInit {
   private customer: Customer;
   private customerForm = this.formBuilder.group({
     id: [''],
-    username: ['', Validators.compose([Validators.minLength(3), Validators.maxLength(20)])],
-    password: ['',Validators.compose([Validators.minLength(8), Validators.maxLength(20)])],
-    firstName: [''],
-    lastName: [''],
-    mailAddress: ['', Validators.compose([Validators.required, Validators.email])],
+    username: ['', Validators.required, Validators.compose([Validators.minLength(3), Validators.maxLength(50)])],
+    password: ['', Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,60}$")],
+    firstName: ['', Validators.required, Validators.compose([Validators.minLength(3), Validators.maxLength(50)])],
+    lastName: ['', Validators.required, Validators.compose([Validators.minLength(2), Validators.maxLength(50)])],
+    mailAddress: ['', Validators.required, Validators.compose([Validators.maxLength(256), Validators.email])],
     phoneNumber: ['', Validators.pattern("[0-9]{9}")],
-    address: [''],
-    fidelityPoints: ['']
+    address: ['', Validators.required, Validators.compose([Validators.minLength(3), Validators.maxLength(200)])],
+    fidelityPoints: ['', Validators.required, Validators.min(0)]
   });
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) { }
