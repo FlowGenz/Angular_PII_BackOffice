@@ -1,7 +1,7 @@
 /* tslint:disable */
 export interface DressDTO {
-  available: boolean;
   id: string;
+  available: boolean;
   description: string;
   price: number;
   size: string;
