@@ -5,7 +5,7 @@ import { BaseService as __BaseService } from '../base-service';
 import { ApiConfiguration as __Configuration } from '../api-configuration';
 import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-response';
 import { Observable as __Observable } from 'rxjs';
-import { map as __map, filter as __filter } from 'rxjs/operators';
+import { map as __map, filter as __filter, catchError } from 'rxjs/operators';
 
 import { DressDTO } from '../models/dress-dto';
 import { Dress } from '../models/dress';
@@ -29,7 +29,7 @@ class DressService extends __BaseService {
   /**
    * @return Success
    */
-  getDressResponse(): __Observable<__StrictHttpResponse<DressDTO>> {
+  getDressResponse(): __Observable<__StrictHttpResponse<Array<DressDTO>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -46,16 +46,17 @@ class DressService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<DressDTO>;
-      })
+        return _r as __StrictHttpResponse<Array<DressDTO>>;
+      }),
+      catchError(this.handleError)
     );
   }
   /**
    * @return Success
    */
-  getDress(): __Observable<DressDTO> {
+  getDress(): __Observable<Array<DressDTO>> {
     return this.getDressResponse().pipe(
-      __map(_r => _r.body as DressDTO)
+      __map(_r => _r.body as Array<DressDTO>)
     );
   }
 
@@ -82,7 +83,8 @@ class DressService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<string>;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
   /**
@@ -118,7 +120,8 @@ class DressService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<string>;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
   /**
@@ -154,7 +157,8 @@ class DressService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<DressDTO>;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
   /**
@@ -190,7 +194,8 @@ class DressService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<string>;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
   /**

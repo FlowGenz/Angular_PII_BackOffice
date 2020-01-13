@@ -5,7 +5,7 @@ import { BaseService as __BaseService } from '../base-service';
 import { ApiConfiguration as __Configuration } from '../api-configuration';
 import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-response';
 import { Observable as __Observable } from 'rxjs';
-import { map as __map, filter as __filter } from 'rxjs/operators';
+import { map as __map, filter as __filter, catchError } from 'rxjs/operators';
 
 import { CustomerDTO } from '../models/customer-dto';
 @Injectable({
@@ -46,7 +46,8 @@ class CustomerService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<Array<CustomerDTO>>;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
   /**
@@ -81,7 +82,8 @@ class CustomerService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return (_r as HttpResponse<any>).clone({ body: parseFloat((_r as HttpResponse<any>).body as string) }) as __StrictHttpResponse<number>
-      })
+      }),
+      catchError(this.handleError)
     );
   }
   /**
@@ -117,7 +119,8 @@ class CustomerService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<string>;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
   /**
@@ -153,7 +156,8 @@ class CustomerService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<CustomerDTO>;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
   /**
@@ -189,7 +193,8 @@ class CustomerService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<string>;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
   /**

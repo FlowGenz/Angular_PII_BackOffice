@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Dress } from '../model/Dress';
-import { DressService } from '../dress.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {SelectionModel} from '@angular/cdk/collections';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { DressDTO } from '../api/models';
+import { DressService } from '../api/services';
 
 const LABEL_RANGE_DRESS_PAGINATOR: string = "Nombre de robes par page :";
 
@@ -39,22 +39,45 @@ export class DressListComponent implements OnInit {
                                       ['partnerId', 'partenaire id']
                                     ];
 
-  dataSource: MatTableDataSource<Dress>;
+  dataSource: MatTableDataSource<DressDTO>;
 
-  selection = new SelectionModel<Dress>(false, []);
+  selection = new SelectionModel<DressDTO>(false, []);
 
   
 
-  expandedElement: Dress | null;
+  expandedElement: DressDTO | null;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private service: DressService) { }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.service.getAll());
-    this.paginator._intl.itemsPerPageLabel = LABEL_RANGE_DRESS_PAGINATOR;
-    this.dataSource.paginator = this.paginator;
+
+    this.service.getDress().subscribe(
+      result => { 
+        this.dataSource = new MatTableDataSource(result);
+        this.paginator._intl.itemsPerPageLabel = LABEL_RANGE_DRESS_PAGINATOR;
+        this.dataSource.paginator = this.paginator;
+      },
+      error => console.log("Error has occured while getting dresses", error),
+      () => console.log("Loading dresses completed !")
+      );
+
+  }
+
+  deleteDress() {
+    if (this.rowChecked) {
+
+      this.service.deleteDressDressId(this.getDressSelected().id).subscribe(
+        result =>
+        {
+          console.log(result);
+          this.ngOnInit();
+        },
+        error => console.log("Erreur suppression robe!"),
+        () => console.log("Suppression terminée")
+      );
+    }
   }
 
   applyFilter(filterValue: String){
@@ -62,12 +85,16 @@ export class DressListComponent implements OnInit {
   }
   
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: Dress): string {
+  checkboxLabel(row?: DressDTO): string {
     if (row) 
         return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
   }
 
-  getDressSelected() : Dress{
-    return this.selection.selected.values[0].id;
+  getDressSelected() : DressDTO{
+    return this.selection.selected[0];
+  }
+
+  public get rowChecked(): boolean {
+    return !this.selection.isEmpty();
   }
 }

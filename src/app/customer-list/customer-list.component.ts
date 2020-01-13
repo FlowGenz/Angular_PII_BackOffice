@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Customer } from '../model/Customer';
 import { CustomerService } from 'src/app/api/services/customer.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -35,7 +34,7 @@ export class CustomerListComponent implements OnInit {
 
   dataSource: MatTableDataSource<CustomerDTO>;
 
-  selection = new SelectionModel<Customer>(false, []);
+  selection = new SelectionModel<CustomerDTO>(false, []);
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -49,9 +48,24 @@ export class CustomerListComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
       },
       error => console.log("Error has occured while getting customer", error),
-      () => console.log("Loading customer completed !")
+      () => console.log("Loading customers completed !")
       );
    
+  }
+
+  deleteCustomer() {
+    if (this.rowChecked) {
+
+      this.service.deleteCustomerCustomerId(this.getCustomerSelected().id).subscribe(
+        result =>
+        {
+          console.log(result);
+          this.ngOnInit();
+        },
+        error => console.log("Erreur suppression client!"),
+        () => console.log("Suppression terminée")
+      );
+    }
   }
 
 
@@ -60,7 +74,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: Customer): string {
+  checkboxLabel(row?: CustomerDTO): string {
     if (row) 
         return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
   }
@@ -69,7 +83,11 @@ export class CustomerListComponent implements OnInit {
     return columnName == 'select';
   }
 
-  getCustomerSelected() : Customer{
-    return this.selection.selected.values[0];
+  getCustomerSelected() : CustomerDTO{
+    return this.selection.selected[0];
+  }
+
+  public get rowChecked(): boolean {
+    return !this.selection.isEmpty();
   }
 }

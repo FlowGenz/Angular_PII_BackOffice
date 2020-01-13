@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
-import { Order } from 'src/app/model/Order';
-import { OrderService } from 'src/app/order.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
+import { DressOrderDTO } from '../api/models';
+import { OrderService } from '../api/services';
 
 const LABEL_ORDER_PAGINATOR: string = "Nombre de commandes client par page :";
 
@@ -28,9 +28,9 @@ export class OrderListComponent implements OnInit {
                                       ['isValid', 'est valide'], 
                                       ['customerId', 'client id']
                                     ];
-  dataSource: MatTableDataSource<Order>;
+  dataSource: MatTableDataSource<DressOrderDTO>;
 
-  selection = new SelectionModel<Order>(false, []);
+  selection = new SelectionModel<DressOrderDTO>(false, []);
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -41,9 +41,31 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.service.getAll());
-    this.paginator._intl.itemsPerPageLabel = LABEL_ORDER_PAGINATOR;
-    this.dataSource.paginator = this.paginator;
+
+    this.service.getOrder().subscribe(
+      result => { 
+        this.dataSource = new MatTableDataSource(result);
+        this.paginator._intl.itemsPerPageLabel = LABEL_ORDER_PAGINATOR;
+        this.dataSource.paginator = this.paginator;
+      },
+      error => console.log("Error has occured while getting orders", error),
+      () => console.log("Loading orders completed !")
+      );
+  }
+
+  deleteOrder() {
+    if (this.rowChecked) {
+
+      this.service.deleteOrder(this.getOrderSelected().id).subscribe(
+        result =>
+        {
+          console.log(result);
+          this.ngOnInit();
+        },
+        error => console.log("Erreur suppression commande!"),
+        () => console.log("Suppression terminée")
+      );
+    }
   }
 
 
@@ -52,7 +74,7 @@ export class OrderListComponent implements OnInit {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: Order): string {
+  checkboxLabel(row?: DressOrderDTO): string {
     if (row)
       return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
   }
@@ -61,17 +83,16 @@ export class OrderListComponent implements OnInit {
     return columnName == 'select';
   }
 
-  getOrderSelected(): Order {
-    return this.selection.selected.values[0];
+  getOrderSelected(): DressOrderDTO {
+    return this.selection.selected[0];
   }
 
-  trackOrder(index: number, order: Order) {
+  trackOrder(index: number, order: DressOrderDTO) {
     return index;
   }
 
-  /*supprimerOrder() {
-    this.dataSource = this.dataSource.filter((value,key)=>{
-      return value.id != row_obj.id;
-  }*/
+  public get rowChecked(): boolean {
+    return !this.selection.isEmpty();
+  }
 
 }

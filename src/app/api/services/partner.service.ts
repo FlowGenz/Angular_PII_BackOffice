@@ -24,7 +24,7 @@ class PartnerService extends __BaseService {
   /**
    * @return Success
    */
-  getPartnerResponse(): __Observable<__StrictHttpResponse<PartnerDTO>> {
+  getPartnerResponse(): __Observable<__StrictHttpResponse<Array<PartnerDTO>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -41,16 +41,16 @@ class PartnerService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<PartnerDTO>;
+        return _r as __StrictHttpResponse<Array<PartnerDTO>>;
       })
     );
   }
   /**
    * @return Success
    */
-  getPartner(): __Observable<PartnerDTO> {
+  getPartner(): __Observable<Array<PartnerDTO>> {
     return this.getPartnerResponse().pipe(
-      __map(_r => _r.body as PartnerDTO)
+      __map(_r => _r.body as Array<PartnerDTO>)
     );
   }
 }

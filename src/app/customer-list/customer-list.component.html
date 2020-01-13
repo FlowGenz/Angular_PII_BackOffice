@@ -10,7 +10,7 @@
                 <button mat-menu-item [routerLink]="'/customerForm'">
                         <span>Modifier</span>
                 </button>
-                <button mat-menu-item>
+                <button mat-menu-item (click)="deleteCustomer()">
                         <span>Supprimer</span>
                 </button>
         </mat-menu>

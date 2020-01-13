@@ -1,5 +1,6 @@
 /* tslint:disable */
 export interface CustomerDTO {
+  id?: string;
   firstName: string;
   lastName: string;
   username: string;
@@ -7,5 +8,5 @@ export interface CustomerDTO {
   email: string;
   phoneNumber?: string;
   customerAddress: string;
-  loyaltyPoints?: number;
+  loyaltyPoints: number;
 }
