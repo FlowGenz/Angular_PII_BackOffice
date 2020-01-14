@@ -20,13 +20,13 @@ export class OrderListComponent implements OnInit {
                                 'isValid', 'customerId'];
 
   displayedColumnsBis: string[][] = [
-                                      ['id', 'id'], 
+                                      ['id', 'ID'], 
                                       ['billingDate', 'Date de facturation'], 
                                       ['deliveryDate', 'Date de livraison'], 
                                       ['billingAddress', 'Adresse de facturation'], 
                                       ['deliveryAddress', 'Adresse de livraison'],
-                                      ['isValid', 'est valide'], 
-                                      ['customerId', 'client id']
+                                      ['isValid', 'Est valide'], 
+                                      ['customerId', 'ID client']
                                     ];
   dataSource: MatTableDataSource<DressOrderDTO>;
 
@@ -56,7 +56,7 @@ export class OrderListComponent implements OnInit {
   deleteOrder() {
     if (this.rowChecked) {
 
-      this.service.deleteOrder(this.getOrderSelected().id).subscribe(
+      this.service.deleteOrderDressOrderId(this.getOrderSelected().id).subscribe(
         result =>
         {
           console.log(result);

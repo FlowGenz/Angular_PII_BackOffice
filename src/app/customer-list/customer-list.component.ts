@@ -18,17 +18,18 @@ const LABEL_CUSTOMER_PAGINATOR: string = "Nombre de clients par page :";
 
 export class CustomerListComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'username', 'password', 'firstName', 'lastName', 'email',
-                                'phoneNumber', 'address', 'loyaltyPoints'];
+  displayedColumns: string[] = ['select', 'id', 'username',/*'customerPassword',*/ 'firstName', 'lastName', 'email',
+                                'phoneNumber', 'customerAddress', 'loyaltyPoints'];
 
   displayedColumnsBis: string[][] = [
-                                      ['username', "nom d'utilisateur"], 
-                                      ['password', 'mot de passe'],  
-                                      ['firstName', 'prénom'], 
-                                      ['lastName', 'nom'],
-                                      ['email', 'adresseMail'], 
-                                      ['phoneNumber', 'numeroTelephone'],
-                                      ['address', 'Adress'], 
+                                      ['id', "ID"], 
+                                      ['username', "Nom d'utilisateur"], 
+                                      //['customerPassword', 'Mot de passe'],  
+                                      ['firstName', 'Prénom'], 
+                                      ['lastName', 'Nom'],
+                                      ['email', 'Adresse mail'], 
+                                      ['phoneNumber', 'Numero de téléphone'],
+                                      ['customerAddress', 'Adresse'], 
                                       ['loyaltyPoints', 'Points de fidelite']
                                     ];
 
@@ -65,6 +66,12 @@ export class CustomerListComponent implements OnInit {
         error => console.log("Erreur suppression client!"),
         () => console.log("Suppression terminée")
       );
+    }
+  }
+
+  editCustomer() {
+    if (this.rowChecked) {
+      this.service.setCustomerEditedUsername(this.getCustomerSelected().username);
     }
   }
 

@@ -17,12 +17,21 @@ class CustomerService extends __BaseService {
   static readonly putCustomerPath = '/Customer';
   static readonly getCustomerUsernamePath = '/Customer/{username}';
   static readonly deleteCustomerCustomerIdPath = '/Customer/{customerId}';
+  private customerEditedUsername: string;
 
   constructor(
     config: __Configuration,
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  setCustomerEditedUsername(username: string) {
+    this.customerEditedUsername = username;
+  }
+
+  getCustomerEditedUsername(): string {
+    return this.customerEditedUsername;
   }
 
   /**

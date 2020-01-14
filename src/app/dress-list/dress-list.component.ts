@@ -26,17 +26,17 @@ export class DressListComponent implements OnInit {
 
 
   //ici tu as ajoute le nom de l'attribut de la robe
-  displayedColumns: string[] = ['select', 'id', 'name', 'availability', 'startAvailabilityDate',
-                                'endAvailabilityDate', 'partnerId'];
+  displayedColumns: string[] = ['select', 'id', 'dressName', 'available', 'dateBeginAvailable',
+                                'dateEndAvailable', 'partnerId'];
   //ici tu as ajoute le nom de l'attribut de la robe et à droite le nom du titre que tu veux a t'as colonne
   displayedColumnsBis: string[][] = [
-                                      ['id', 'id'], 
-                                      ['name', 'nom'], 
+                                      ['id', 'ID'], 
+                                      ['dressName', 'Nom'], 
                                       //['description', 'description'], 
-                                      ['availability', 'disponibilite'], 
-                                      ['startAvailabilityDate', 'Date de debut disponibilite'],
-                                      ['endAvailabilityDate', 'Date de fin disponibilité'], 
-                                      ['partnerId', 'partenaire id']
+                                      ['available', 'Disponibilité'], 
+                                      ['dateBeginAvailable', 'Date de debut disponibilite'],
+                                      ['dateEndAvailable', 'Date de fin disponibilité'], 
+                                      ['partnerId', 'ID Partenaire']
                                     ];
 
   dataSource: MatTableDataSource<DressDTO>;

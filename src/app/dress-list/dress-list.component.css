@@ -56,3 +56,10 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-description-attribution {
     opacity: 0.5;
 }
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+  }

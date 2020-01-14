@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { Order } from '../model/Order';
-import { Customer } from '../model/Customer';
-import { CustomerService } from '../customer.service';
+import { DressOrderDTO } from '../api/models';
+import { OrderService } from '../api/services';
 
 @Component({
   selector: 'app-order-form',
@@ -13,8 +12,7 @@ import { CustomerService } from '../customer.service';
 })
 export class OrderFormComponent implements OnInit {
 
-  private customers: Customer[] = [];
-  private order: Order;
+  private order: DressOrderDTO;
   private orderForm = this.formBuilder.group({
     id: [''],
     billingDate: ['', Validators.required],
@@ -25,11 +23,10 @@ export class OrderFormComponent implements OnInit {
     customerId: ['', Validators.required]
   });
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private service: CustomerService) { }
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private orderService: OrderService, private router: Router) { }
 
   ngOnInit() {
-    
-    this.customers[0] = new Customer(1,"test","1234","Flo","Jans","flowgenzyt@gmail.com","+32470265668","Chez moi", 500);
+  
   }
 
   submitForm() {

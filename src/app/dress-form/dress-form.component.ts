@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Dress } from '../model/Dress';
-import { PartnerService } from '../partner.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PartnerService, DressService, CustomerService } from '../api/services';
+import { DressDTO, PartnerDTO, Dress, CustomerDTO } from '../api/models';
 
 @Component({
   selector: 'app-dress-form',
@@ -13,25 +13,47 @@ import { PartnerService } from '../partner.service';
 export class DressFormComponent implements OnInit {
 
   private dress: Dress;
+  private partners: PartnerDTO[];
+  private customers: CustomerDTO[];
   private dressForm = this.formBuilder.group({
-    id: [''],
-    name: ['', Validators.required, Validators.minLength(2), Validators.maxLength(50)],
-    description: ['', Validators.required, Validators.minLength(2), Validators.maxLength(200)],
-    price: ['', Validators.required, Validators.min(0), Validators.max(9999.99)],
     available: ['', Validators.required],
-    startAvailableDate: ['', Validators.required],
-    endAvailableDate: [''],
-    partnerId: ['', Validators.required]
+    id: [''],
+    description: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(200)])],
+    price: ['', Validators.compose([Validators.required, Validators.min(0), Validators.max(9999.99)])],
+    size: ['', Validators.required],
+    dressName: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(50)])],
+    dateBeginAvailable: ['', Validators.required],
+    dateEndAvailable: [''],
+    partnerId: ['', Validators.required],
+    userId: ['', Validators.required],
+    partnerName: [''],
+    urlImage: ['', Validators.required]
   });
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private service: PartnerService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private customerService: CustomerService, private partnerService: PartnerService, private dressService: DressService) { }
 
   ngOnInit() {
+    this.partnerService.getPartner().subscribe(
+      result => {
+        this.partners = result;
+      }
+    )
+
+    this.customerService.getCustomer().subscribe(
+      result => {
+        this.customers = result;
+      }
+    )
   }
 
   submitForm() {
     this.dress = this.dressForm.value;
-    console.log(this.dress);
+    //console.log(this.dress);
+    this.dressService.postDress(this.dress).subscribe(
+      result => {
+        this.router.navigate(['/dressList']);
+      }
+    )
   }
 
 }

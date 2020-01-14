@@ -8,6 +8,7 @@ export { Dress } from './models/dress';
 export { FavoriteDTO } from './models/favorite-dto';
 export { FavoriteDressDTO } from './models/favorite-dress-dto';
 export { LoginDTO } from './models/login-dto';
+export { JwtDTO } from './models/jwt-dto';
 export { OrderLineDTO } from './models/order-line-dto';
 export { DressOrderDTO } from './models/dress-order-dto';
 export { PartnerDTO } from './models/partner-dto';
