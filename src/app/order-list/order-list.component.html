@@ -4,10 +4,10 @@
                 <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-                <button mat-menu-item [routerLink]="'/orderForm'" disabled="rowChecked()">
+                <button mat-menu-item [routerLink]="'/orderForm'" *ngIf="rowChecked">
                         <span>Modifier</span>
                 </button>
-                <button mat-menu-item (click)="deleteOrder()" disabled="rowChecked()">
+                <button mat-menu-item (click)="deleteOrder()" *ngIf="rowChecked">
                         <span>Supprimer</span>
                 </button>
         </mat-menu>

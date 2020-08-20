@@ -15,7 +15,7 @@ export class CustomerFormComponent implements OnInit {
 
   private customer: CustomerDTO;
   private customerForm = this.formBuilder.group({
-    id: [''],
+    id: [{value: '', disabled: true}],
     firstName: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
     lastName: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(50)])],
     username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],

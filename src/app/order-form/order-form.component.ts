@@ -15,7 +15,7 @@ export class OrderFormComponent implements OnInit {
 
   private order: DressOrderDTO;
   private orderForm = this.formBuilder.group({
-    id: [''],
+    id: [{value: '', disabled : true}],
     billingDate: ['', Validators.required],
     deliveryDate: ['', Validators.required],
     billingAddress: ['', Validators.required],

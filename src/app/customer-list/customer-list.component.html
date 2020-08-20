@@ -7,10 +7,10 @@
                 <button mat-menu-item [routerLink]="'/customerForm'">
                         <span>Ajouter</span>
                 </button>
-                <button mat-menu-item [routerLink]="'/customerForm'" (click)="editCustomer()" disabled="rowChecked()">
+                <button mat-menu-item [routerLink]="'/customerForm'" *ngIf="rowChecked" (click)="editCustomer()">
                         <span>Modifier</span>
                 </button>
-                <button mat-menu-item (click)="deleteCustomer()" disabled="rowChecked()">
+                <button mat-menu-item (click)="deleteCustomer()" *ngIf="rowChecked">
                         <span>Supprimer</span>
                 </button>
         </mat-menu>

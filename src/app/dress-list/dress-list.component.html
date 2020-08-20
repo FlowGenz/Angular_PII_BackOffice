@@ -7,10 +7,10 @@
             <button mat-menu-item [routerLink]="'/dressForm'">
                     <span>Ajouter</span>
             </button>
-            <button mat-menu-item [routerLink]="'/dressForm'" disabled="rowChecked()">
+            <button mat-menu-item [routerLink]="'/dressForm'" *ngIf="rowChecked">
                     <span>Modifier</span>
             </button>
-            <button mat-menu-item (click)="deleteDress()" disabled="rowChecked()">
+            <button mat-menu-item (click)="deleteDress()" *ngIf="rowChecked">
                     <span>Supprimer</span>
             </button>
     </mat-menu>
