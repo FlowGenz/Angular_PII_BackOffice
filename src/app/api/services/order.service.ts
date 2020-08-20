@@ -17,12 +17,21 @@ class OrderService extends __BaseService {
   static readonly putOrderPath = '/Order';
   static readonly getOrderUsernamePath = '/Order/{username}';
   static readonly deleteOrderDressOrderIdPath = '/Order/{dressOrderId}';
+  private orderIdEdited: string;
 
   constructor(
     config: __Configuration,
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  setOrderIdEdited(orderIdEdited: string) {
+    this.orderIdEdited = orderIdEdited;
+  }
+
+  getOrderIdEdited(): string {
+    return this.orderIdEdited;
   }
 
   /**

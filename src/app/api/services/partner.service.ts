@@ -8,6 +8,7 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter, catchError } from 'rxjs/operators';
 
 import { PartnerDTO } from '../models/partner-dto';
+
 @Injectable({
   providedIn: 'root',
 })

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 import { JwtDTO } from './api/models';
 
@@ -8,21 +8,44 @@ import { JwtDTO } from './api/models';
 })
 export class AuthService {
 
-  isLoggedIn: boolean = false;
-  redirectUrl: string;
-  token: JwtDTO;
+  private redirectUrl: string;
+  private accessToken: JwtDTO;
+  private username: BehaviorSubject<string>;
 
-  constructor() { }
+  constructor() {
+      this.username = new BehaviorSubject<string>("");
+   }
 
-  login(token: JwtDTO): Observable<boolean> {
-    return of(true).pipe(
-      delay(1000),
-      tap(val => this.isLoggedIn = true),
-      tap(val => this.token = token)
-    );
-  }
+   public setToken(token: JwtDTO) {
+     this.accessToken = token;
+   }
 
-  logout(): void {
-    this.isLoggedIn = false;
-  }
+   public getToken(): JwtDTO {
+     return this.accessToken;
+   }
+
+   public login(username: string) {
+     this.username.next(username);
+   }
+
+   public logout() {
+     this.username.next(null);
+     this.accessToken = null;
+   }
+
+   public isAuthenticated(): boolean {
+     return this.accessToken !== null && this.accessToken !== undefined;
+   }
+
+   public getCurrentUserUsername(): string {
+     return this.username.value;
+   } 
+
+   public getRedirectUrl(): string {
+     return this.redirectUrl;
+   }
+
+   public setRedirectUrl(url: string) {
+     this.redirectUrl = url;
+   }
 }

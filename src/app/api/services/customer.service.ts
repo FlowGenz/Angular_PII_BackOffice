@@ -6,8 +6,8 @@ import { ApiConfiguration as __Configuration } from '../api-configuration';
 import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-response';
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter, catchError } from 'rxjs/operators';
-
 import { CustomerDTO } from '../models/customer-dto';
+
 @Injectable({
   providedIn: 'root',
 })

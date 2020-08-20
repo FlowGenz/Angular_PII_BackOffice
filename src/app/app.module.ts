@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, forwardRef } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
@@ -17,8 +17,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { getFrenchPaginatorIntl } from './french-paginator-intl';
 import { MatPaginatorIntl } from '@angular/material';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiModule } from './api/api.module';
+import { ApiInterceptor } from './api/ApiInterceptor';
 
 @NgModule({
   declarations: [
@@ -41,12 +42,13 @@ import { ApiModule } from './api/api.module';
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
-    ApiModule.forRoot({rootUrl:"http://localhost:5000"})
+    ApiModule.forRoot({rootUrl:"http://localhost:10839"})
   ],
 
   //Ce renseigner sur providers
   providers: [ 
-    { provide:MatPaginatorIntl, useValue: getFrenchPaginatorIntl() }
+    { provide:MatPaginatorIntl, useValue: getFrenchPaginatorIntl() },
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

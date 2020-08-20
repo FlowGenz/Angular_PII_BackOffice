@@ -22,3 +22,9 @@ form p {
 mat-form-field {
     width: 60%;
 }
+
+.error {
+    color: red;
+    font-weight: bold;
+    font-style: italic;
+}

@@ -7,8 +7,8 @@
     <button mat-button [routerLink]="'/orderList'">Commandes</button>
   </div>
   <div>
-    <button mat-button [routerLink]="'/login'" *ngIf="!authService.isLoggedIn">Se connecter</button>
-    <button mat-button (click)="logout()" [routerLink]="'/login'" *ngIf="authService.isLoggedIn">Se déconnecter</button>
+    <button mat-button [routerLink]="'/login'" *ngIf="!authService.isAuthenticated()">Se connecter</button>
+    <button mat-button (click)="logout()" [routerLink]="'/login'" *ngIf="authService.isAuthenticated()">Se déconnecter</button>
     <!--<button mat-button [routerLink]="'/register'">S'inscrire</button>-->
   </div>
 </mat-toolbar>

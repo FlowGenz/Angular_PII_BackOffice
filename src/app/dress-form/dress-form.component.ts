@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartnerService, DressService, CustomerService } from '../api/services';
 import { DressDTO, PartnerDTO, Dress, CustomerDTO } from '../api/models';
+import { NotificationBarService } from '../notification-bar.service';
 
 @Component({
   selector: 'app-dress-form',
@@ -12,7 +13,7 @@ import { DressDTO, PartnerDTO, Dress, CustomerDTO } from '../api/models';
 })
 export class DressFormComponent implements OnInit {
 
-  private dress: Dress;
+  private dress: DressDTO;
   private partners: PartnerDTO[];
   private customers: CustomerDTO[];
   private dressForm = this.formBuilder.group({
@@ -30,20 +31,37 @@ export class DressFormComponent implements OnInit {
     urlImage: ['', Validators.required]
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private customerService: CustomerService, private partnerService: PartnerService, private dressService: DressService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private customerService: CustomerService, private partnerService: PartnerService, private dressService: DressService, private notificationBarService: NotificationBarService) { }
 
   ngOnInit() {
     this.partnerService.getPartner().subscribe(
       result => {
         this.partners = result;
+      },
+      error => {
+        this.notificationBarService.openNotificationBar(error)
       }
     )
 
     this.customerService.getCustomer().subscribe(
       result => {
         this.customers = result;
+      },
+      error => {
+        this.notificationBarService.openNotificationBar(error)
       }
     )
+
+    if (this.dressService.getDressIdEdited() != null) {
+      this.dressService.getDressId(this.dressService.getDressIdEdited()).subscribe(
+        result => {
+          this.dress = result;
+        },
+        error => {
+          this.notificationBarService.openNotificationBar(error)
+        });
+      console.log(this.dress);
+    }
   }
 
   submitForm() {
@@ -52,6 +70,9 @@ export class DressFormComponent implements OnInit {
     this.dressService.postDress(this.dress).subscribe(
       result => {
         this.router.navigate(['/dressList']);
+      },
+      error => {
+        this.notificationBarService.openNotificationBar(error)
       }
     )
   }

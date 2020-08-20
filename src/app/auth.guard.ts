@@ -22,11 +22,11 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(url: string) : boolean {
-    if (this.authService.isLoggedIn) {
+    if (this.authService.isAuthenticated()) {
       return true;
     }
 
-    this.authService.redirectUrl = url;
+    this.authService.setRedirectUrl(url);
     this.router.navigate(['/login']);
     return false;
   }

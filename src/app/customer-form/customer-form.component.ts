@@ -4,6 +4,7 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from '../api/services';
 import { CustomerDTO } from '../api/models';
+import { NotificationBarService } from '../notification-bar.service';
 
 @Component({
   selector: 'app-customer-form',
@@ -25,13 +26,16 @@ export class CustomerFormComponent implements OnInit {
     loyaltyPoints: ['', Validators.compose([Validators.required, Validators.min(0)])]
   });
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private customerService: CustomerService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private customerService: CustomerService, private router: Router, private notificationBarService: NotificationBarService) { }
 
   ngOnInit() {
     if (this.customerService.getCustomerEditedUsername() != null) {
       this.customerService.getCustomerUsername(this.customerService.getCustomerEditedUsername()).subscribe(
         result => {
           this.customer = result;
+        },
+        error => {
+          this.notificationBarService.openNotificationBar(error)
         });
       console.log(this.customer);
     }
@@ -43,6 +47,9 @@ export class CustomerFormComponent implements OnInit {
     this.customerService.postCustomer(this.customer).subscribe(
       result => {
         this.router.navigate(['/customerList']);
+      },
+      error => {
+        this.notificationBarService.openNotificationBar(error)
       }
     )
   }

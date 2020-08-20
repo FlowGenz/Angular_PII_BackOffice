@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { JwtService } from '../api/services';
 import { LoginDTO } from '../api/models';
+import { NotificationBarService } from '../notification-bar.service';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +15,13 @@ import { LoginDTO } from '../api/models';
 export class LoginComponent implements OnInit {
 
   private loginCredentials: LoginDTO;
+  private errorMessage: String;
   private accountCredentialsForm = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private jwtService: JwtService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private jwtService: JwtService, private router: Router, private notificationBarService: NotificationBarService) { }
 
   ngOnInit() {
   }
@@ -32,17 +34,16 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-
     this.jwtService.postJwt(this.loginCredentials).subscribe(
       result => {
-        this.authService.login(result).subscribe(() => {
-          if(this.authService.isLoggedIn) {
-            let redirect = this.authService.redirectUrl ? this.router.parseUrl(this.authService.redirectUrl) : '/customerList';
-            this.router.navigateByUrl(redirect);
-          }
-        });
-      }
-    )
+        this.authService.setToken(result);
+        this.authService.login(this.accountCredentialsForm.get("username").value);
+        this.router.navigateByUrl(this.authService.getRedirectUrl() ? this.router.parseUrl(this.authService.getRedirectUrl()) : '/dressList');
+        },
+      error => {
+        //this.errorMessage = error;
+        this.notificationBarService.openNotificationBar(error);
+    })
   }
 
 }

@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import {SelectionModel} from '@angular/cdk/collections';
 import { CustomerDTO } from '../api/models';
+import { NotificationBarService } from '../notification-bar.service';
 
 const LABEL_CUSTOMER_PAGINATOR: string = "Nombre de clients par page :";
 
@@ -39,7 +40,7 @@ export class CustomerListComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private service: CustomerService) { }
+  constructor(private service: CustomerService, private notificationBarService: NotificationBarService) { }
 
   ngOnInit() {
     this.service.getCustomer().subscribe(
@@ -48,8 +49,7 @@ export class CustomerListComponent implements OnInit {
         this.paginator._intl.itemsPerPageLabel = LABEL_CUSTOMER_PAGINATOR;
         this.dataSource.paginator = this.paginator;
       },
-      error => console.log("Error has occured while getting customer", error),
-      () => console.log("Loading customers completed !")
+      error => this.notificationBarService.openNotificationBar(error)
       );
    
   }
@@ -63,8 +63,7 @@ export class CustomerListComponent implements OnInit {
           console.log(result);
           this.ngOnInit();
         },
-        error => console.log("Erreur suppression client!"),
-        () => console.log("Suppression terminée")
+        error => this.notificationBarService.openNotificationBar(error)
       );
     }
   }

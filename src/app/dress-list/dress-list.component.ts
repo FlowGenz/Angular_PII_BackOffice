@@ -5,6 +5,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { DressDTO } from '../api/models';
 import { DressService } from '../api/services';
+import { NotificationBarService } from '../notification-bar.service';
 
 const LABEL_RANGE_DRESS_PAGINATOR: string = "Nombre de robes par page :";
 
@@ -49,7 +50,7 @@ export class DressListComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private service: DressService) { }
+  constructor(private service: DressService, private notificationBarService: NotificationBarService) { }
 
   ngOnInit() {
 
@@ -59,8 +60,7 @@ export class DressListComponent implements OnInit {
         this.paginator._intl.itemsPerPageLabel = LABEL_RANGE_DRESS_PAGINATOR;
         this.dataSource.paginator = this.paginator;
       },
-      error => console.log("Error has occured while getting dresses", error),
-      () => console.log("Loading dresses completed !")
+      error => this.notificationBarService.openNotificationBar(error)
       );
 
   }

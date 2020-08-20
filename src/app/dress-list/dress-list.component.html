@@ -7,10 +7,10 @@
             <button mat-menu-item [routerLink]="'/dressForm'">
                     <span>Ajouter</span>
             </button>
-            <button mat-menu-item [routerLink]="'/dressForm'">
+            <button mat-menu-item [routerLink]="'/dressForm'" disabled="rowChecked()">
                     <span>Modifier</span>
             </button>
-            <button mat-menu-item (click)="deleteDress()">
+            <button mat-menu-item (click)="deleteDress()" disabled="rowChecked()">
                     <span>Supprimer</span>
             </button>
     </mat-menu>
