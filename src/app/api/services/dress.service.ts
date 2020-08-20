@@ -5,11 +5,9 @@ import { BaseService as __BaseService } from '../base-service';
 import { ApiConfiguration as __Configuration } from '../api-configuration';
 import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-response';
 import { Observable as __Observable } from 'rxjs';
-import { map as __map, filter as __filter, catchError } from 'rxjs/operators';
+import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { DressDTO } from '../models/dress-dto';
-import { Dress } from '../models/dress';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -17,6 +15,7 @@ class DressService extends __BaseService {
   static readonly getDressPath = '/Dress';
   static readonly postDressPath = '/Dress';
   static readonly putDressPath = '/Dress';
+  static readonly getDressPageIndexPageSizePath = '/Dress/{pageIndex}/{pageSize}';
   static readonly getDressIdPath = '/Dress/{id}';
   static readonly deleteDressDressIdPath = '/Dress/{dressId}';
   private dressIdEdited: string;
@@ -57,8 +56,7 @@ class DressService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<Array<DressDTO>>;
-      }),
-      catchError(this.handleError)
+      })
     );
   }
   /**
@@ -74,7 +72,7 @@ class DressService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  postDressResponse(body?: Dress): __Observable<__StrictHttpResponse<string>> {
+  postDressResponse(body?: DressDTO): __Observable<__StrictHttpResponse<string>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -93,15 +91,14 @@ class DressService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<string>;
-      }),
-      catchError(this.handleError)
+      })
     );
   }
   /**
    * @param body undefined
    * @return Success
    */
-  postDress(body?: Dress): __Observable<string> {
+  postDress(body?: DressDTO): __Observable<string> {
     return this.postDressResponse(body).pipe(
       __map(_r => _r.body as string)
     );
@@ -111,7 +108,7 @@ class DressService extends __BaseService {
    * @param body undefined
    * @return Success
    */
-  putDressResponse(body?: Dress): __Observable<__StrictHttpResponse<string>> {
+  putDressResponse(body?: DressDTO): __Observable<__StrictHttpResponse<string>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -130,17 +127,63 @@ class DressService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<string>;
-      }),
-      catchError(this.handleError)
+      })
     );
   }
   /**
    * @param body undefined
    * @return Success
    */
-  putDress(body?: Dress): __Observable<string> {
+  putDress(body?: DressDTO): __Observable<string> {
     return this.putDressResponse(body).pipe(
       __map(_r => _r.body as string)
+    );
+  }
+
+  /**
+   * @param params The `DressService.GetDressPageIndexPageSizeParams` containing the following parameters:
+   *
+   * - `pageSize`:
+   *
+   * - `pageIndex`:
+   *
+   * @return Success
+   */
+  getDressPageIndexPageSizeResponse(params: DressService.GetDressPageIndexPageSizeParams): __Observable<__StrictHttpResponse<Array<DressDTO>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Dress/${params.pageIndex}/${params.pageSize}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Array<DressDTO>>;
+      })
+    );
+  }
+  /**
+   * @param params The `DressService.GetDressPageIndexPageSizeParams` containing the following parameters:
+   *
+   * - `pageSize`:
+   *
+   * - `pageIndex`:
+   *
+   * @return Success
+   */
+  getDressPageIndexPageSize(params: DressService.GetDressPageIndexPageSizeParams): __Observable<Array<DressDTO>> {
+    return this.getDressPageIndexPageSizeResponse(params).pipe(
+      __map(_r => _r.body as Array<DressDTO>)
     );
   }
 
@@ -167,8 +210,7 @@ class DressService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<DressDTO>;
-      }),
-      catchError(this.handleError)
+      })
     );
   }
   /**
@@ -204,8 +246,7 @@ class DressService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<string>;
-      }),
-      catchError(this.handleError)
+      })
     );
   }
   /**
@@ -220,6 +261,14 @@ class DressService extends __BaseService {
 }
 
 module DressService {
+
+  /**
+   * Parameters for getDressPageIndexPageSize
+   */
+  export interface GetDressPageIndexPageSizeParams {
+    pageSize: number;
+    pageIndex: number;
+  }
 }
 
 export { DressService }

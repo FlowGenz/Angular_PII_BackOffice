@@ -7,7 +7,6 @@ import { CustomerService } from './services/customer.service';
 import { DressService } from './services/dress.service';
 import { FavoriteService } from './services/favorite.service';
 import { JwtService } from './services/jwt.service';
-import { LoginService } from './services/login.service';
 import { OrderService } from './services/order.service';
 import { PartnerService } from './services/partner.service';
 import { SentenceService } from './services/sentence.service';
@@ -29,7 +28,6 @@ import { SentenceService } from './services/sentence.service';
     DressService,
     FavoriteService,
     JwtService,
-    LoginService,
     OrderService,
     PartnerService,
     SentenceService

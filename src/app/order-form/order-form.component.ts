@@ -33,7 +33,7 @@ export class OrderFormComponent implements OnInit {
           this.order = result;
         },
         error => {
-          this.notificationBarService.openNotificationBar(error)
+          //this.notificationBarService.openNotificationBar(error)
         });
       console.log(this.order);
     }
@@ -50,7 +50,7 @@ export class OrderFormComponent implements OnInit {
         this.router.navigate(['/orderList']);
       },
       error => {
-        this.notificationBarService.openNotificationBar(error)
+        //this.notificationBarService.openNotificationBar(error)
       }
     )
   }

@@ -35,7 +35,7 @@ export class CustomerFormComponent implements OnInit {
           this.customer = result;
         },
         error => {
-          this.notificationBarService.openNotificationBar(error)
+          //this.notificationBarService.openNotificationBar(error)
         });
       console.log(this.customer);
     }
@@ -49,7 +49,7 @@ export class CustomerFormComponent implements OnInit {
         this.router.navigate(['/customerList']);
       },
       error => {
-        this.notificationBarService.openNotificationBar(error)
+        //this.notificationBarService.openNotificationBar(error)
       }
     )
   }

@@ -50,7 +50,7 @@ export class CustomerListComponent implements OnInit {
         this.paginator._intl.itemsPerPageLabel = LABEL_CUSTOMER_PAGINATOR;
         this.dataSource.paginator = this.paginator;
       },
-      error => this.notificationBarService.openNotificationBar(error)
+      //error => this.notificationBarService.openNotificationBar(error)
       );
   }
 
@@ -63,7 +63,7 @@ export class CustomerListComponent implements OnInit {
           console.log(result);
           this.ngOnInit();
         },
-        error => this.notificationBarService.openNotificationBar(error)
+        //error => this.notificationBarService.openNotificationBar(error)
       );
     }
   }

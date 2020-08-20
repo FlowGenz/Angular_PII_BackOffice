@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartnerService, DressService, CustomerService } from '../api/services';
-import { DressDTO, PartnerDTO, Dress, CustomerDTO } from '../api/models';
+import { DressDTO, PartnerDTO, CustomerDTO } from '../api/models';
 import { NotificationBarService } from '../notification-bar.service';
 
 @Component({
@@ -39,7 +39,7 @@ export class DressFormComponent implements OnInit {
         this.partners = result;
       },
       error => {
-        this.notificationBarService.openNotificationBar(error)
+        //this.notificationBarService.openNotificationBar(error)
       }
     )
 
@@ -48,7 +48,7 @@ export class DressFormComponent implements OnInit {
         this.customers = result;
       },
       error => {
-        this.notificationBarService.openNotificationBar(error)
+        //this.notificationBarService.openNotificationBar(error)
       }
     )
 
@@ -58,7 +58,7 @@ export class DressFormComponent implements OnInit {
           this.dress = result;
         },
         error => {
-          this.notificationBarService.openNotificationBar(error)
+          //this.notificationBarService.openNotificationBar(error)
         });
       console.log(this.dress);
     }
@@ -72,7 +72,7 @@ export class DressFormComponent implements OnInit {
         this.router.navigate(['/dressList']);
       },
       error => {
-        this.notificationBarService.openNotificationBar(error)
+        //this.notificationBarService.openNotificationBar(error)
       }
     )
   }

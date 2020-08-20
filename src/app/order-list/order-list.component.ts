@@ -49,7 +49,7 @@ export class OrderListComponent implements OnInit {
         this.paginator._intl.itemsPerPageLabel = LABEL_ORDER_PAGINATOR;
         this.dataSource.paginator = this.paginator;
       },
-      error => this.notificationBarService.openNotificationBar(error)
+      //error => this.notificationBarService.openNotificationBar(error)
       );
   }
 
@@ -62,7 +62,7 @@ export class OrderListComponent implements OnInit {
           console.log(result);
           this.ngOnInit();
         },
-        error => this.notificationBarService.openNotificationBar(error)
+        //error => this.notificationBarService.openNotificationBar(error)
       );
     }
   }
