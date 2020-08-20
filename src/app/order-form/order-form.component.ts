@@ -29,7 +29,6 @@ export class OrderFormComponent implements OnInit {
 
   ngOnInit() {
     
-    this.customers[0] = new Customer(1,"test","1234","Flo","Jans","flowgenzyt@gmail.com","+32470265668","Chez moi", 500);
   }
 
   submitForm() {

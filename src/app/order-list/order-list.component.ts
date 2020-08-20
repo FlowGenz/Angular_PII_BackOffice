@@ -50,7 +50,7 @@ export class OrderListComponent implements OnInit {
       },
       error => console.log("Error has occured while getting orders", error),
       () => console.log("Loading orders completed !")
-      );
+    );
   }
 
   deleteOrder() {

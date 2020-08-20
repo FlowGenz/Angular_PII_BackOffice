@@ -1,6 +1,5 @@
 /* tslint:disable */
 export interface CustomerDTO {
-  id?: string;
   firstName: string;
   lastName: string;
   username: string;
