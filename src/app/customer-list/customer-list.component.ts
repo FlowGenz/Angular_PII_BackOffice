@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 import {SelectionModel} from '@angular/cdk/collections';
 import { CustomerDTO } from '../api/models';
+import { NotificationBarService } from '../notification-bar.service';
 
 const LABEL_CUSTOMER_PAGINATOR: string = "Nombre de clients par page :";
 
@@ -18,17 +19,18 @@ const LABEL_CUSTOMER_PAGINATOR: string = "Nombre de clients par page :";
 
 export class CustomerListComponent implements OnInit {
 
-  displayedColumns: string[] = ['select', 'username', 'password', 'firstName', 'lastName', 'email',
-                                'phoneNumber', 'address', 'loyaltyPoints'];
+  displayedColumns: string[] = ['select', 'id', 'username',/*'customerPassword',*/ 'firstName', 'lastName', 'email',
+                                'phoneNumber', 'customerAddress', 'loyaltyPoints'];
 
   displayedColumnsBis: string[][] = [
-                                      ['username', "nom d'utilisateur"], 
-                                      ['password', 'mot de passe'],  
-                                      ['firstName', 'prénom'], 
-                                      ['lastName', 'nom'],
-                                      ['email', 'adresseMail'], 
-                                      ['phoneNumber', 'numeroTelephone'],
-                                      ['address', 'Adress'], 
+                                      ['id', "ID"], 
+                                      ['username', "Nom d'utilisateur"], 
+                                      //['customerPassword', 'Mot de passe'],  
+                                      ['firstName', 'Prénom'], 
+                                      ['lastName', 'Nom'],
+                                      ['email', 'Adresse mail'], 
+                                      ['phoneNumber', 'Numero de téléphone'],
+                                      ['customerAddress', 'Adresse'], 
                                       ['loyaltyPoints', 'Points de fidelite']
                                     ];
 
@@ -38,7 +40,7 @@ export class CustomerListComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private service: CustomerService) { }
+  constructor(private service: CustomerService, private notificationBarService: NotificationBarService) { }
 
   ngOnInit() {
     this.service.getCustomer().subscribe(
@@ -47,8 +49,7 @@ export class CustomerListComponent implements OnInit {
         this.paginator._intl.itemsPerPageLabel = LABEL_CUSTOMER_PAGINATOR;
         this.dataSource.paginator = this.paginator;
       },
-      error => console.log("Error has occured while getting customer", error),
-      () => console.log("Loading customers completed !")
+      error => this.notificationBarService.openNotificationBar(error)
       );
    
   }
@@ -62,9 +63,14 @@ export class CustomerListComponent implements OnInit {
           console.log(result);
           this.ngOnInit();
         },
-        error => console.log("Erreur suppression client!"),
-        () => console.log("Suppression terminée")
+        error => this.notificationBarService.openNotificationBar(error)
       );
+    }
+  }
+
+  editCustomer() {
+    if (this.rowChecked) {
+      this.service.setCustomerEditedUsername(this.getCustomerSelected().username);
     }
   }
 

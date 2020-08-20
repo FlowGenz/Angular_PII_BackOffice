@@ -9,6 +9,7 @@ import { map as __map, filter as __filter, catchError } from 'rxjs/operators';
 
 import { DressDTO } from '../models/dress-dto';
 import { Dress } from '../models/dress';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,12 +19,21 @@ class DressService extends __BaseService {
   static readonly putDressPath = '/Dress';
   static readonly getDressIdPath = '/Dress/{id}';
   static readonly deleteDressDressIdPath = '/Dress/{dressId}';
+  private dressIdEdited: string;
 
   constructor(
     config: __Configuration,
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  setDressIdEdited(dressIdEdited: string) {
+    this.dressIdEdited = dressIdEdited;
+  }
+
+  getDressIdEdited(): string {
+    return this.dressIdEdited;
   }
 
   /**

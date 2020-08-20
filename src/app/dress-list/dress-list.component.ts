@@ -5,6 +5,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { DressDTO } from '../api/models';
 import { DressService } from '../api/services';
+import { NotificationBarService } from '../notification-bar.service';
 
 const LABEL_RANGE_DRESS_PAGINATOR: string = "Nombre de robes par page :";
 
@@ -26,17 +27,17 @@ export class DressListComponent implements OnInit {
 
 
   //ici tu as ajoute le nom de l'attribut de la robe
-  displayedColumns: string[] = ['select', 'id', 'name', 'availability', 'startAvailabilityDate',
-                                'endAvailabilityDate', 'partnerId'];
+  displayedColumns: string[] = ['select', 'id', 'dressName', 'available', 'dateBeginAvailable',
+                                'dateEndAvailable', 'partnerId'];
   //ici tu as ajoute le nom de l'attribut de la robe et à droite le nom du titre que tu veux a t'as colonne
   displayedColumnsBis: string[][] = [
-                                      ['id', 'id'], 
-                                      ['name', 'nom'], 
+                                      ['id', 'ID'], 
+                                      ['dressName', 'Nom'], 
                                       //['description', 'description'], 
-                                      ['availability', 'disponibilite'], 
-                                      ['startAvailabilityDate', 'Date de debut disponibilite'],
-                                      ['endAvailabilityDate', 'Date de fin disponibilité'], 
-                                      ['partnerId', 'partenaire id']
+                                      ['available', 'Disponibilité'], 
+                                      ['dateBeginAvailable', 'Date de debut disponibilite'],
+                                      ['dateEndAvailable', 'Date de fin disponibilité'], 
+                                      ['partnerId', 'ID Partenaire']
                                     ];
 
   dataSource: MatTableDataSource<DressDTO>;
@@ -49,7 +50,7 @@ export class DressListComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private service: DressService) { }
+  constructor(private service: DressService, private notificationBarService: NotificationBarService) { }
 
   ngOnInit() {
 
@@ -59,8 +60,7 @@ export class DressListComponent implements OnInit {
         this.paginator._intl.itemsPerPageLabel = LABEL_RANGE_DRESS_PAGINATOR;
         this.dataSource.paginator = this.paginator;
       },
-      error => console.log("Error has occured while getting dresses", error),
-      () => console.log("Loading dresses completed !")
+      error => this.notificationBarService.openNotificationBar(error)
       );
 
   }

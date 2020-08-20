@@ -1,15 +1,15 @@
-<form class="formOffice" [formGroup]="dressForm">
+<form class="formOffice" [formGroup]="dressForm" (ngSubmit)="submitForm()">
     <fieldset>
         <legend>Robe</legend>
         <p>
             <mat-form-field>
-                <input matInput type="text" placeholder="Id" formControlName="id" />
+                <input matInput type="text" placeholder="Id" formControlName="id" disabled/>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field>
-                <input matInput type="text" placeholder="Nom de la robe" formControlName="name" required />
-                <mat-error *ngIf="dressForm.get('name').hasError('required')">
+                <input matInput type="text" placeholder="Nom de la robe" formControlName="dressName" required />
+                <mat-error *ngIf="dressForm.get('dressName').hasError('required')">
                     Nom de la robe <strong>requis</strong>
                 </mat-error>
             </mat-form-field>
@@ -32,19 +32,37 @@
         </p>
         <p>
             <mat-form-field>
-                <input matInput type="date" placeholder="Date début disponibilité" formControlName="startAvailableDate"
+                <input matInput type="date" placeholder="Date début disponibilité" formControlName="dateBeginAvailable"
                     required />
-                <mat-error *ngIf="dressForm.get('startAvailableDate').hasError('required')">
+                <mat-error *ngIf="dressForm.get('dateBeginAvailable').hasError('required')">
                     Date de début <strong>requise</strong>
                 </mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field>
-                <input matInput type="date" placeholder="Date fin disponibilité" formControlName="endAvailableDate"
+                <input matInput type="date" placeholder="Date fin disponibilité" formControlName="dateEndAvailable"
                     required />
-                <mat-error *ngIf="dressForm.get('endAvailableDate').hasError('required')">
+                <mat-error *ngIf="dressForm.get('dateEndAvailable').hasError('required')">
                     Date de fin <strong>requise</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Taille" formControlName="size"
+                    required />
+                <mat-error *ngIf="dressForm.get('size').hasError('required')">
+                    Taille <strong>requise</strong>
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Url image" formControlName="urlImage"
+                    required />
+                <mat-error *ngIf="dressForm.get('urlImage').hasError('required')">
+                    Url de l'image <strong>requise</strong>
                 </mat-error>
             </mat-form-field>
         </p>
@@ -54,7 +72,18 @@
                 <mat-label>Partenaire</mat-label>
                 <mat-select formControlName="partnerId" required>
                     <mat-option *ngFor="let partner of partners" [value]="partner.id">
-                        {{partner.lastName}}
+                        {{partner.username}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <p>
+            <!--COMBOBOX CUSTOMER-->
+            <mat-form-field>
+                <mat-label>Client</mat-label>
+                <mat-select formControlName="userId" required>
+                    <mat-option *ngFor="let customer of customers" [value]="customer.id">
+                        {{customer.username}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

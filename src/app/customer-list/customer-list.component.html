@@ -7,10 +7,10 @@
                 <button mat-menu-item [routerLink]="'/customerForm'">
                         <span>Ajouter</span>
                 </button>
-                <button mat-menu-item [routerLink]="'/customerForm'">
+                <button mat-menu-item [routerLink]="'/customerForm'" (click)="editCustomer()" disabled="rowChecked()">
                         <span>Modifier</span>
                 </button>
-                <button mat-menu-item (click)="deleteCustomer()">
+                <button mat-menu-item (click)="deleteCustomer()" disabled="rowChecked()">
                         <span>Supprimer</span>
                 </button>
         </mat-menu>
@@ -43,5 +43,5 @@
                         (click)="selection.toggle(row)">
                 </tr>
         </table>
-        <mat-paginator [pageSize]="[12]" showFirstLastButtons></mat-paginator>
+        <mat-paginator [pageSize]="[2]" showFirstLastButtons></mat-paginator>
 </div>

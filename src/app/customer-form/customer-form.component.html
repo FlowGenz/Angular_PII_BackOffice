@@ -3,7 +3,7 @@
         <legend>Client</legend>
         <p>
             <mat-form-field>
-                <input matInput type="text" placeholder="Id" formControlName="id"/>
+                <input matInput type="text" placeholder="Id" formControlName="id" disabled/>
             </mat-form-field>
         </p>
         <p>
@@ -16,8 +16,8 @@
         </p>
         <p>
             <mat-form-field>
-                <input matInput type="password" placeholder="Mot de passe" formControlName="password" required />
-                <mat-error *ngIf="customerForm.get('password').hasError('required')">
+                <input matInput type="password" placeholder="Mot de passe" formControlName="customerPassword" required />
+                <mat-error *ngIf="customerForm.get('customerPassword').hasError('required')">
                     Mot de passe <strong>requis</strong>
                 </mat-error>
             </mat-form-field>
@@ -40,12 +40,11 @@
         </p>
         <p>
             <mat-form-field>
-                <input matInput type="email" placeholder="Adresse e-mail" formControlName="mailAddress" required />
-                <mat-error
-                    *ngIf="customerForm.get('mailAddress').hasError('email') && !customerForm.get('mailAddress').hasError('required')">
+                <input matInput type="email" placeholder="Adresse e-mail" formControlName="email" required />
+                <mat-error *ngIf="customerForm.get('email').hasError('email') && !customerForm.get('email').hasError('required')">
                     Format de l'adresse mail <strong>incorrect</strong>
                 </mat-error>
-                <mat-error *ngIf="customerForm.get('mailAddress').hasError('required')">
+                <mat-error *ngIf="customerForm.get('email').hasError('required')">
                     Adresse mail <strong>requise</strong>
                 </mat-error>
             </mat-form-field>
@@ -58,16 +57,16 @@
         </p>
         <p>
             <mat-form-field>
-                <input matInput type="text" placeholder="Adresse" formControlName="address" required />
-                <mat-error *ngIf="customerForm.get('address').hasError('required')">
+                <input matInput type="text" placeholder="Adresse" formControlName="customerAddress" required />
+                <mat-error *ngIf="customerForm.get('customerAddress').hasError('required')">
                     Adresse <strong>requise</strong>
                 </mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field>
-                <input matInput type="text" placeholder="Points de fidélité" formControlName="fidelityPoints" value="0" required />
-                <mat-error *ngIf="customerForm.get('id').hasError('required')">
+                <input matInput type="number" placeholder="Points de fidélité" formControlName="loyaltyPoints" required />
+                <mat-error *ngIf="customerForm.get('loyaltyPoints').hasError('required')">
                     Points de fidélité <strong>requis</strong>
                 </mat-error>
             </mat-form-field>

@@ -1,7 +1,8 @@
 /* tslint:disable */
-import { HttpClient, HttpParameterCodec, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpParameterCodec, HttpParams, HttpErrorResponse, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { ApiConfiguration } from './api-configuration';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 /**
  * Custom parameter codec to correctly handle the plus sign in parameter
@@ -36,7 +37,8 @@ export class BaseService {
   ) {
   }
 
-  private _rootUrl: string = 'https://dressservice.azurewebsites.net';
+  //private _rootUrl: string = 'https://dressservice.azurewebsites.net';
+  private _rootUrl: string = 'http://localhost:10839';
 
   /**
    * Returns the root url for API operations. If not set directly in this
@@ -74,7 +76,8 @@ export class BaseService {
         `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
+    //alert(error.error);
     return throwError(
-      'Something bad happened; please try again later.');
+      error.error);
   };
 }

@@ -12,7 +12,7 @@ export interface Dress {
   dressName: string;
   dateEndAvailable?: string;
   urlImage: string;
-  userId: string;
+  userId?: string;
   user?: User;
   favorites?: Array<Favorites>;
   orderLine?: Array<OrderLine>;

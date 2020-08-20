@@ -6,8 +6,8 @@ import { ApiConfiguration as __Configuration } from '../api-configuration';
 import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-response';
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter, catchError } from 'rxjs/operators';
-
 import { CustomerDTO } from '../models/customer-dto';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,12 +17,21 @@ class CustomerService extends __BaseService {
   static readonly putCustomerPath = '/Customer';
   static readonly getCustomerUsernamePath = '/Customer/{username}';
   static readonly deleteCustomerCustomerIdPath = '/Customer/{customerId}';
+  private customerEditedUsername: string;
 
   constructor(
     config: __Configuration,
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  setCustomerEditedUsername(username: string) {
+    this.customerEditedUsername = username;
+  }
+
+  getCustomerEditedUsername(): string {
+    return this.customerEditedUsername;
   }
 
   /**

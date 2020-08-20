@@ -15,14 +15,23 @@ class OrderService extends __BaseService {
   static readonly getOrderPath = '/Order';
   static readonly postOrderPath = '/Order';
   static readonly putOrderPath = '/Order';
-  static readonly deleteOrderPath = '/Order';
   static readonly getOrderUsernamePath = '/Order/{username}';
+  static readonly deleteOrderDressOrderIdPath = '/Order/{dressOrderId}';
+  private orderIdEdited: string;
 
   constructor(
     config: __Configuration,
     http: HttpClient
   ) {
     super(config, http);
+  }
+
+  setOrderIdEdited(orderIdEdited: string) {
+    this.orderIdEdited = orderIdEdited;
+  }
+
+  getOrderIdEdited(): string {
+    return this.orderIdEdited;
   }
 
   /**
@@ -134,43 +143,6 @@ class OrderService extends __BaseService {
   }
 
   /**
-   * @param body undefined
-   * @return Success
-   */
-  deleteOrderResponse(body?: string): __Observable<__StrictHttpResponse<string>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    __body = body;
-    let req = new HttpRequest<any>(
-      'DELETE',
-      this.rootUrl + `/Order`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'text'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<string>;
-      }),
-      catchError(this.handleError)
-    );
-  }
-  /**
-   * @param body undefined
-   * @return Success
-   */
-  deleteOrder(body?: string): __Observable<string> {
-    return this.deleteOrderResponse(body).pipe(
-      __map(_r => _r.body as string)
-    );
-  }
-
-  /**
    * @param username undefined
    * @return Success
    */
@@ -204,6 +176,43 @@ class OrderService extends __BaseService {
   getOrderUsername(username: string): __Observable<DressOrderDTO> {
     return this.getOrderUsernameResponse(username).pipe(
       __map(_r => _r.body as DressOrderDTO)
+    );
+  }
+
+  /**
+   * @param dressOrderId undefined
+   * @return Success
+   */
+  deleteOrderDressOrderIdResponse(dressOrderId: string): __Observable<__StrictHttpResponse<string>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'DELETE',
+      this.rootUrl + `/Order/${dressOrderId}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'text'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<string>;
+      }),
+      catchError(this.handleError)
+    );
+  }
+  /**
+   * @param dressOrderId undefined
+   * @return Success
+   */
+  deleteOrderDressOrderId(dressOrderId: string): __Observable<string> {
+    return this.deleteOrderDressOrderIdResponse(dressOrderId).pipe(
+      __map(_r => _r.body as string)
     );
   }
 }

@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DressOrderDTO } from '../api/models';
 import { OrderService } from '../api/services';
+import { NotificationBarService } from '../notification-bar.service';
 
 const LABEL_ORDER_PAGINATOR: string = "Nombre de commandes client par page :";
 
@@ -20,13 +21,13 @@ export class OrderListComponent implements OnInit {
                                 'isValid', 'customerId'];
 
   displayedColumnsBis: string[][] = [
-                                      ['id', 'id'], 
+                                      ['id', 'ID'], 
                                       ['billingDate', 'Date de facturation'], 
                                       ['deliveryDate', 'Date de livraison'], 
                                       ['billingAddress', 'Adresse de facturation'], 
                                       ['deliveryAddress', 'Adresse de livraison'],
-                                      ['isValid', 'est valide'], 
-                                      ['customerId', 'client id']
+                                      ['isValid', 'Est valide'], 
+                                      ['customerId', 'ID client']
                                     ];
   dataSource: MatTableDataSource<DressOrderDTO>;
 
@@ -34,7 +35,7 @@ export class OrderListComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private service: OrderService) { }
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private service: OrderService, private notificationBarService: NotificationBarService) { }
 
   toggleElementSelection(element: any) {
       this.selection.toggle(element);
@@ -48,22 +49,20 @@ export class OrderListComponent implements OnInit {
         this.paginator._intl.itemsPerPageLabel = LABEL_ORDER_PAGINATOR;
         this.dataSource.paginator = this.paginator;
       },
-      error => console.log("Error has occured while getting orders", error),
-      () => console.log("Loading orders completed !")
-    );
+      error => this.notificationBarService.openNotificationBar(error)
+      );
   }
 
   deleteOrder() {
     if (this.rowChecked) {
 
-      this.service.deleteOrder(this.getOrderSelected().id).subscribe(
+      this.service.deleteOrderDressOrderId(this.getOrderSelected().id).subscribe(
         result =>
         {
           console.log(result);
           this.ngOnInit();
         },
-        error => console.log("Erreur suppression commande!"),
-        () => console.log("Suppression terminée")
+        error => this.notificationBarService.openNotificationBar(error)
       );
     }
   }
