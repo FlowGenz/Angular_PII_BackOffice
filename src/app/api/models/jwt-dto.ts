@@ -2,4 +2,5 @@
 export interface JwtDTO {
   acces_token?: string;
   expires_in?: number;
+  roles?: Array<string>;
 }

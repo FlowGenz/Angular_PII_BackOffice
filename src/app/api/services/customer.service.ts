@@ -5,9 +5,9 @@ import { BaseService as __BaseService } from '../base-service';
 import { ApiConfiguration as __Configuration } from '../api-configuration';
 import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-response';
 import { Observable as __Observable } from 'rxjs';
-import { map as __map, filter as __filter, catchError } from 'rxjs/operators';
-import { CustomerDTO } from '../models/customer-dto';
+import { map as __map, filter as __filter } from 'rxjs/operators';
 
+import { CustomerDTO } from '../models/customer-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,6 +15,7 @@ class CustomerService extends __BaseService {
   static readonly getCustomerPath = '/Customer';
   static readonly postCustomerPath = '/Customer';
   static readonly putCustomerPath = '/Customer';
+  static readonly getCustomerPageIndexPageSizePath = '/Customer/{pageIndex}/{pageSize}';
   static readonly getCustomerUsernamePath = '/Customer/{username}';
   static readonly deleteCustomerCustomerIdPath = '/Customer/{customerId}';
   private customerEditedUsername: string;
@@ -55,8 +56,7 @@ class CustomerService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<Array<CustomerDTO>>;
-      }),
-      catchError(this.handleError)
+      })
     );
   }
   /**
@@ -91,8 +91,7 @@ class CustomerService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return (_r as HttpResponse<any>).clone({ body: parseFloat((_r as HttpResponse<any>).body as string) }) as __StrictHttpResponse<number>
-      }),
-      catchError(this.handleError)
+      })
     );
   }
   /**
@@ -128,8 +127,7 @@ class CustomerService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<string>;
-      }),
-      catchError(this.handleError)
+      })
     );
   }
   /**
@@ -139,6 +137,53 @@ class CustomerService extends __BaseService {
   putCustomer(body?: CustomerDTO): __Observable<string> {
     return this.putCustomerResponse(body).pipe(
       __map(_r => _r.body as string)
+    );
+  }
+
+  /**
+   * @param params The `CustomerService.GetCustomerPageIndexPageSizeParams` containing the following parameters:
+   *
+   * - `pageSize`:
+   *
+   * - `pageIndex`:
+   *
+   * @return Success
+   */
+  getCustomerPageIndexPageSizeResponse(params: CustomerService.GetCustomerPageIndexPageSizeParams): __Observable<__StrictHttpResponse<Array<CustomerDTO>>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/Customer/${params.pageIndex}/${params.pageSize}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Array<CustomerDTO>>;
+      })
+    );
+  }
+  /**
+   * @param params The `CustomerService.GetCustomerPageIndexPageSizeParams` containing the following parameters:
+   *
+   * - `pageSize`:
+   *
+   * - `pageIndex`:
+   *
+   * @return Success
+   */
+  getCustomerPageIndexPageSize(params: CustomerService.GetCustomerPageIndexPageSizeParams): __Observable<Array<CustomerDTO>> {
+    return this.getCustomerPageIndexPageSizeResponse(params).pipe(
+      __map(_r => _r.body as Array<CustomerDTO>)
     );
   }
 
@@ -165,8 +210,7 @@ class CustomerService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<CustomerDTO>;
-      }),
-      catchError(this.handleError)
+      })
     );
   }
   /**
@@ -202,8 +246,7 @@ class CustomerService extends __BaseService {
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
         return _r as __StrictHttpResponse<string>;
-      }),
-      catchError(this.handleError)
+      })
     );
   }
   /**
@@ -218,6 +261,14 @@ class CustomerService extends __BaseService {
 }
 
 module CustomerService {
+
+  /**
+   * Parameters for getCustomerPageIndexPageSize
+   */
+  export interface GetCustomerPageIndexPageSizeParams {
+    pageSize: number;
+    pageIndex: number;
+  }
 }
 
 export { CustomerService }

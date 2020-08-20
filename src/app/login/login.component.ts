@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         },
       error => {
         //this.errorMessage = error;
-        this.notificationBarService.openNotificationBar(error);
+        //this.notificationBarService.openNotificationBar(error);
     })
   }
 

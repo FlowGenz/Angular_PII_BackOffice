@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import {SelectionModel} from '@angular/cdk/collections';
 import { CustomerDTO } from '../api/models';
 import { NotificationBarService } from '../notification-bar.service';
+import { BehaviorSubject } from 'rxjs';
 
 const LABEL_CUSTOMER_PAGINATOR: string = "Nombre de clients par page :";
 
@@ -49,9 +50,8 @@ export class CustomerListComponent implements OnInit {
         this.paginator._intl.itemsPerPageLabel = LABEL_CUSTOMER_PAGINATOR;
         this.dataSource.paginator = this.paginator;
       },
-      error => this.notificationBarService.openNotificationBar(error)
+      //error => this.notificationBarService.openNotificationBar(error)
       );
-   
   }
 
   deleteCustomer() {
@@ -63,7 +63,7 @@ export class CustomerListComponent implements OnInit {
           console.log(result);
           this.ngOnInit();
         },
-        error => this.notificationBarService.openNotificationBar(error)
+        //error => this.notificationBarService.openNotificationBar(error)
       );
     }
   }
