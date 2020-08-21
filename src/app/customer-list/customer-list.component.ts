@@ -39,19 +39,64 @@ export class CustomerListComponent implements OnInit {
 
   selection = new SelectionModel<CustomerDTO>(false, []);
 
+  private indexMax: number;
+  private pageIndex: number;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private service: CustomerService, private notificationBarService: NotificationBarService) { }
 
   ngOnInit() {
-    this.service.getCustomer().subscribe(
+    /*this.service.getCustomer().subscribe(
       result => { 
         this.dataSource = new MatTableDataSource(result);
         this.paginator._intl.itemsPerPageLabel = LABEL_CUSTOMER_PAGINATOR;
         this.dataSource.paginator = this.paginator;
-      },
+      }
       //error => this.notificationBarService.openNotificationBar(error)
-      );
+      );*/
+      this.indexMax = 0;
+      this.pageIndex = this.indexMax;
+  }
+
+  ngAfterViewInit(){
+    this.paginator._intl.itemsPerPageLabel = LABEL_CUSTOMER_PAGINATOR;
+    this.getData();
+  }
+
+  getData() {
+    this.service.getCustomerPageIndexPageSize({pageIndex: this.pageIndex, pageSize: this.paginator.pageSize}).subscribe(
+      result => {
+        this.indexMax = result.totalPages;
+        this.setDataSource(result.customersDTO);
+      });
+  }
+
+  setDataSource(result) {
+    this.dataSource = new MatTableDataSource(result);
+    this.paginator._intl.itemsPerPageLabel = LABEL_CUSTOMER_PAGINATOR;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  setPageIndexPlus(){
+    if(this.pageIndex < this.indexMax){
+      this.pageIndex++;
+      this.getData();
+    }
+  }
+  setPageIndexMinus(){
+    if(this.pageIndex > 0){
+      this.pageIndex--;
+      this.getData();
+    }
+  }
+
+  public resetIndex = () :void => {
+    this.pageIndex = 0;
+    this.getData();
+  }
+
+  isNotLastIndex(index: number) : boolean {
+    return index < this.displayedColumnsBis.length-1;
   }
 
   deleteCustomer() {

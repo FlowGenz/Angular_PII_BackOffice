@@ -20,7 +20,6 @@
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
         </mat-form-field>
         <table mat-table [dataSource]="dataSource">
-                
                 <ng-container matColumnDef="select">
                         <th mat-header-cell *matHeaderCellDef></th>
                         <td mat-cell *matCellDef="let row">
@@ -31,17 +30,21 @@
                                         [aria-label]="checkboxLabel(row)">
                             </mat-checkbox>
                         </td>
+                        <td mat-footer-cell *matFooterCellDef><button mat-button (click)="setPageIndexMinus()">Précédent</button></td>
                 </ng-container>
             
-                <ng-container matColumnDef="{{column[0]}}" *ngFor="let column of displayedColumnsBis">
+                <ng-container matColumnDef="{{column[0]}}" *ngFor="let column of displayedColumnsBis; let indexOfElement=index;">
                         <th mat-header-cell *matHeaderCellDef> {{column[1]}} </th>
                         <td mat-cell *matCellDef="let element"> {{element[column[0]]}}</td>
+                        <td mat-footer-cell *matFooterCellDef><span *ngIf="isNotLastIndex(indexOfElement); else lastElement;"></span></td>
                 </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-                        (click)="selection.toggle(row)">
-                </tr>
+                
+                <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+                <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
         </table>
-        <mat-paginator [pageSize]="[2]" showFirstLastButtons></mat-paginator>
+        <mat-paginator [length]="indexMax" [pageSize]="[2]"></mat-paginator>
 </div>
+<ng-template #lastElement>
+        <button mat-button (click)="setPageIndexPlus()">Suivant</button>
+</ng-template>
