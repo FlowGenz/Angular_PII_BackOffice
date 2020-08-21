@@ -8,6 +8,7 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { DressOrderDTO } from '../models/dress-order-dto';
+import { PaginationDressOrderDTO } from '../models/pagination-dress-order-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,7 +17,6 @@ class OrderService extends __BaseService {
   static readonly postOrderPath = '/Order';
   static readonly putOrderPath = '/Order';
   static readonly getOrderPageIndexPageSizePath = '/Order/{pageIndex}/{pageSize}';
-  static readonly getOrderUsernamePath = '/Order/{username}';
   static readonly getOrderOrderIdPath = '/Order/{orderId}';
   static readonly deleteOrderDressOrderIdPath = '/Order/{dressOrderId}';
   private orderIdEdited: string;
@@ -150,7 +150,7 @@ class OrderService extends __BaseService {
    *
    * @return Success
    */
-  getOrderPageIndexPageSizeResponse(params: OrderService.GetOrderPageIndexPageSizeParams): __Observable<__StrictHttpResponse<Array<DressOrderDTO>>> {
+  getOrderPageIndexPageSizeResponse(params: OrderService.GetOrderPageIndexPageSizeParams): __Observable<__StrictHttpResponse<PaginationDressOrderDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -169,7 +169,7 @@ class OrderService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<DressOrderDTO>>;
+        return _r as __StrictHttpResponse<PaginationDressOrderDTO>;
       })
     );
   }
@@ -182,45 +182,9 @@ class OrderService extends __BaseService {
    *
    * @return Success
    */
-  getOrderPageIndexPageSize(params: OrderService.GetOrderPageIndexPageSizeParams): __Observable<Array<DressOrderDTO>> {
+  getOrderPageIndexPageSize(params: OrderService.GetOrderPageIndexPageSizeParams): __Observable<PaginationDressOrderDTO> {
     return this.getOrderPageIndexPageSizeResponse(params).pipe(
-      __map(_r => _r.body as Array<DressOrderDTO>)
-    );
-  }
-
-  /**
-   * @param username undefined
-   * @return Success
-   */
-  getOrderUsernameResponse(username: string): __Observable<__StrictHttpResponse<DressOrderDTO>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-
-    let req = new HttpRequest<any>(
-      'GET',
-      this.rootUrl + `/Order/${username}`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<DressOrderDTO>;
-      })
-    );
-  }
-  /**
-   * @param username undefined
-   * @return Success
-   */
-  getOrderUsername(username: string): __Observable<DressOrderDTO> {
-    return this.getOrderUsernameResponse(username).pipe(
-      __map(_r => _r.body as DressOrderDTO)
+      __map(_r => _r.body as PaginationDressOrderDTO)
     );
   }
 

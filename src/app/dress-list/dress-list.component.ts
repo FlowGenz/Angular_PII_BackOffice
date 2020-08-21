@@ -65,17 +65,19 @@ export class DressListComponent implements OnInit {
 
   }
 
+  loadDress() {
+    if (this.rowChecked)
+      this.service.setDressIdEdited(this.getDressSelected().id);
+  }
+
   deleteDress() {
     if (this.rowChecked) {
 
       this.service.deleteDressDressId(this.getDressSelected().id).subscribe(
         result =>
         {
-          console.log(result);
           this.ngOnInit();
-        },
-        error => console.log("Erreur suppression robe!"),
-        () => console.log("Suppression terminée")
+        }
       );
     }
   }

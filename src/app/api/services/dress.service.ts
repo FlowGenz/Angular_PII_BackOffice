@@ -8,6 +8,7 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { DressDTO } from '../models/dress-dto';
+import { PaginationDressDTO } from '../models/pagination-dress-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -149,7 +150,7 @@ class DressService extends __BaseService {
    *
    * @return Success
    */
-  getDressPageIndexPageSizeResponse(params: DressService.GetDressPageIndexPageSizeParams): __Observable<__StrictHttpResponse<Array<DressDTO>>> {
+  getDressPageIndexPageSizeResponse(params: DressService.GetDressPageIndexPageSizeParams): __Observable<__StrictHttpResponse<PaginationDressDTO>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -168,7 +169,7 @@ class DressService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Array<DressDTO>>;
+        return _r as __StrictHttpResponse<PaginationDressDTO>;
       })
     );
   }
@@ -181,9 +182,9 @@ class DressService extends __BaseService {
    *
    * @return Success
    */
-  getDressPageIndexPageSize(params: DressService.GetDressPageIndexPageSizeParams): __Observable<Array<DressDTO>> {
+  getDressPageIndexPageSize(params: DressService.GetDressPageIndexPageSizeParams): __Observable<PaginationDressDTO> {
     return this.getDressPageIndexPageSizeResponse(params).pipe(
-      __map(_r => _r.body as Array<DressDTO>)
+      __map(_r => _r.body as PaginationDressDTO)
     );
   }
 

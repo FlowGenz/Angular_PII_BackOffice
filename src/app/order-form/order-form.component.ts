@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { NotificationBarService } from '../notification-bar.service';
   templateUrl: './order-form.component.html',
   styleUrls: ['./order-form.component.css']
 })
-export class OrderFormComponent implements OnInit {
+export class OrderFormComponent implements OnInit, OnDestroy {
 
   private order: DressOrderDTO;
   private orderForm = this.formBuilder.group({
@@ -28,15 +28,19 @@ export class OrderFormComponent implements OnInit {
 
   ngOnInit() {
     if (this.orderService.getOrderIdEdited() != null) {
-      this.orderService.getOrderUsername(this.orderService.getOrderIdEdited()).subscribe(
+      this.orderService.getOrderOrderId(this.orderService.getOrderIdEdited()).subscribe(
         result => {
-          this.order = result;
+          this.orderForm.patchValue(result);
         },
         error => {
           //this.notificationBarService.openNotificationBar(error)
         });
       console.log(this.order);
     }
+  }
+
+  ngOnDestroy() {
+    this.orderService.setOrderIdEdited(null);
   }
 
   submitForm() {
@@ -47,6 +51,7 @@ export class OrderFormComponent implements OnInit {
     console.log(this.order);
     this.orderService.postOrder(this.order).subscribe(
       result => {
+        this.orderService.setOrderIdEdited(null);
         this.router.navigate(['/orderList']);
       },
       error => {

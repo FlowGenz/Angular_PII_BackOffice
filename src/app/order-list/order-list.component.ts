@@ -53,13 +53,17 @@ export class OrderListComponent implements OnInit {
       );
   }
 
+  loadOrder() {
+    if (this.rowChecked)
+      this.service.setOrderIdEdited(this.getOrderSelected().id);
+  }
+
   deleteOrder() {
     if (this.rowChecked) {
 
       this.service.deleteOrderDressOrderId(this.getOrderSelected().id).subscribe(
         result =>
         {
-          console.log(result);
           this.ngOnInit();
         },
         //error => this.notificationBarService.openNotificationBar(error)

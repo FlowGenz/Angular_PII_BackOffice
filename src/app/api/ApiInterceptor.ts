@@ -31,10 +31,14 @@ export class ApiInterceptor implements HttpInterceptor {
             tap(x => x, error => {
                 // Handle this err
                 console.error(`Error performing request, status code = ${error.status}`);
-                //if(err.status == 403 || err.status == 415 || err.status == 500 || err.status == 0) this.route.navigate(['/error']);
-                this.errorMessage = error;
+                this.errorMessage = error.message;
+                if (error.status == 403 || error.status == 500) this.route.navigate(['/dressList']);
+                if (error.status == 0) this.errorMessage = "Impossible to connect to the server. Please try again.";
+                //if (error.status == 400) this.errorMessage = "An error occured with your request. Please try again.";
                 if (error.status == 401) this.errorMessage = "Login credentials not valid.";
                 if (error.status == 403) this.errorMessage = "Access denied, you cannot access this.";
+                if (error.status == 404) this.errorMessage = "Nothing found.";
+                if (error.status == 500) this.errorMessage = "An error occured server-side. We are doing our best to fix it.";
                 this.notificationBarService.openNotificationBar(this.errorMessage);
             })
         );

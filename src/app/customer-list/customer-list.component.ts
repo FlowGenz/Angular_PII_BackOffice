@@ -60,7 +60,6 @@ export class CustomerListComponent implements OnInit {
       this.service.deleteCustomerCustomerId(this.getCustomerSelected().id).subscribe(
         result =>
         {
-          console.log(result);
           this.ngOnInit();
         },
         //error => this.notificationBarService.openNotificationBar(error)
@@ -68,7 +67,7 @@ export class CustomerListComponent implements OnInit {
     }
   }
 
-  editCustomer() {
+  loadCustomer() {
     if (this.rowChecked) {
       this.service.setCustomerEditedUsername(this.getCustomerSelected().username);
     }

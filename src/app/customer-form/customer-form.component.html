@@ -16,7 +16,7 @@
         </p>
         <p>
             <mat-form-field>
-                <input matInput type="password" placeholder="Mot de passe" formControlName="customerPassword" required />
+                <input matInput type="password" placeholder="Mot de passe" formControlName="customerPassword" required/>
                 <mat-error *ngIf="customerForm.get('customerPassword').hasError('required')">
                     Mot de passe <strong>requis</strong>
                 </mat-error>

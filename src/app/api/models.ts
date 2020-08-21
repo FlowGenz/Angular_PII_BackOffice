@@ -1,9 +1,12 @@
 export { CustomerDTO } from './models/customer-dto';
+export { PaginationCustomerDTO } from './models/pagination-customer-dto';
 export { DressDTO } from './models/dress-dto';
+export { PaginationDressDTO } from './models/pagination-dress-dto';
 export { FavoriteDTO } from './models/favorite-dto';
 export { FavoriteDressDTO } from './models/favorite-dress-dto';
 export { LoginDTO } from './models/login-dto';
 export { JwtDTO } from './models/jwt-dto';
 export { OrderLineDTO } from './models/order-line-dto';
 export { DressOrderDTO } from './models/dress-order-dto';
+export { PaginationDressOrderDTO } from './models/pagination-dress-order-dto';
 export { PartnerDTO } from './models/partner-dto';

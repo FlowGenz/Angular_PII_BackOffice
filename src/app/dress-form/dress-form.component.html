@@ -41,8 +41,7 @@
         </p>
         <p>
             <mat-form-field>
-                <input matInput type="date" placeholder="Date fin disponibilité" formControlName="dateEndAvailable"
-                    required />
+                <input matInput type="date" placeholder="Date fin disponibilité" formControlName="dateEndAvailable"/>
                 <mat-error *ngIf="dressForm.get('dateEndAvailable').hasError('required')">
                     Date de fin <strong>requise</strong>
                 </mat-error>
@@ -81,7 +80,7 @@
             <!--COMBOBOX CUSTOMER-->
             <mat-form-field>
                 <mat-label>Client</mat-label>
-                <mat-select formControlName="userId" required>
+                <mat-select formControlName="userId">
                     <mat-option *ngFor="let customer of customers" [value]="customer.id">
                         {{customer.username}}
                     </mat-option>
